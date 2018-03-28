@@ -39,7 +39,7 @@ The AWS DeepLens camera includes the following:
 
 + Audio out and USB ports
 
-The AWS DeepLens camera is powered by an Intel® Atomprocessor, which can process 100 billion floating\-point operations per second \(GFLOPS\)\. This gives you all of the compute power that you need to perform inference on your device\. The micro HDMI display port, audio out, and USB ports allow you to attach peripherals, so you can get creative with your computer vision applications\.
+The AWS DeepLens camera is powered by an Intel® Atom processor, which can process 100 billion floating\-point operations per second \(GFLOPS\)\. This gives you all of the compute power that you need to perform inference on your device\. The micro HDMI display port, audio out, and USB ports allow you to attach peripherals, so you can get creative with your computer vision applications\.
 
 You can use AWS DeepLens as soon as you register it\. Begin by deploying a sample project, and use it as an example for developing your own computer vision applications\.
 
