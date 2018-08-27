@@ -1,4 +1,4 @@
-# model\.doInference\(video\_frame\)<a name="deeplens-device-library-awscam-model-doinference"></a>
+# model\.doInference Method<a name="deeplens-device-library-awscam-model-doinference"></a>
 
 Runs inference on a video frame \(image file\) by applying the loaded model\. The method returns the result of the inference\.
 
@@ -11,12 +11,10 @@ result = model.doInference(video_frame)
 ```
 
 **Parameters**
-
-+ `video_frame`—Required\. The model runs its inference on a video frame \(image file\) and returns the result of the model inference, which is a dictionary\.
++ `video_frame`—Required\. A video frame from the AWS DeepLens video feeds\.
 
 **Return Type**
-
-+ `dict list`
++ `dict list` — The inference result, as a dictionary, based on the loaded model\.
 
 **Returns**  
 Returns a `dict` with a single key\-value pair\. The key is the name of the model's output layer, which is defined by the model you use\. The value is a list of `dicts` in which each element is an object that the model identified and its associated probability\. The user who applies the model should know how to parse the result\.

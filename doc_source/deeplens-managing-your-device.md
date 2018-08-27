@@ -1,7 +1,9 @@
 # Managing Your AWS DeepLens Device<a name="deeplens-managing-your-device"></a>
 
-The following topics explain how to manage your AWS DeepLens device:
+The following topics explain how to manage your AWS DeepLens device and access device resource from a AWS Greengrass Lambda function:
 
-
-+ [Updating Your AWS DeepLens Device](deeplens-manual-updates.md)
-+ [Deregister an AWS DeepLens Device](deeplens-deregister-device.md)
+**Topics**
++ [Securely Boot Your AWS DeepLens Device](deeplens-secure-boot.md)
++ [Update Your AWS DeepLens Device](deeplens-manual-updates.md)
++ [Deregistering Your AWS DeepLens Device](deeplens-deregister-device.md)
++ [Deleting AWS DeepLens Resources](deeplens-delete-resources.md)

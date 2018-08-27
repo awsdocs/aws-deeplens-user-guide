@@ -66,4 +66,4 @@ Your web browser is the interface between you and your AWS DeepLens device\. You
 **Important**  
 Deploying a project incurs costs for the AWS services that are used to run the project\. 
 
-For instructions on viewing your project's output, see [Viewing AWS DeepLens Project Output](deeplens-viewing-output.md)\.
+For instructions on viewing your project's output, see [Viewing AWS DeepLens Output Streams](deeplens-viewing-output.md)\.

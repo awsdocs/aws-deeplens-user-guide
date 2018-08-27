@@ -4,7 +4,7 @@ When your AWS DeepLens device is registered and connected, you can begin using i
 
 AWS DeepLens comes with several sample projects that you can deploy and use right out of the box\.
 
-
+**Topics**
 + [AWS DeepLens Sample Projects Overview](deeplens-templated-projects-overview.md)
 + [Creating and Deploying an AWS DeepLens Sample Project](deeplens-create-deploy-sample-project.md)
 + [Extending any Project's Functionality](deeplens-extend.md)

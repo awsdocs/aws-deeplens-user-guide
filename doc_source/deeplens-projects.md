@@ -4,9 +4,8 @@ When your AWS DeepLens device is registered and connected, you can begin using i
 
 AWS DeepLens comes with several sample projects that you can deploy and use right out of the box\.
 
-
+**Topics**
 + [Machine Learning Frameworks Supported by AWS DeepLens](deeplens-supported-frameworks.md)
-+ [Deploying an AWS DeepLens Project](deeplens-deploy-project.md)
-+ [Viewing AWS DeepLens Project Output](deeplens-viewing-output.md)
++ [Viewing AWS DeepLens Output Streams](deeplens-viewing-output.md)
 + [Working with AWS DeepLens Sample Projects](deeplens-sample-projects.md)
 + [Working with AWS DeepLens Custom Projects](deeplens-custom-projects.md)

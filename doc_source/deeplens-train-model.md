@@ -4,7 +4,7 @@ In this example, you start with a SqueezeNet object detection model and use Amaz
 
 After training the model, you import its artifacts into AWS DeepLens, and create a project\. You then watch as your AWS DeepLens detects and identifies hot dogs\.
 
-
+**Topics**
 + [Step 1: Create an Amazon S3 Bucket](#create-s3-bucket)
 + [Step 2: Create an Amazon SageMaker Notebook Instance](#create-sagemaker-notebook)
 + [Step 3: Edit the Model in Amazon SageMaker](#edit-model-sagemaker)
@@ -135,14 +135,12 @@ You now upload the training file and use it to edit the model\.
 Each step is numbered in a fashion such as `In [1]:`\. While the block is executing, that changes to `In [*]:`\. When the block finishes executing it returns to `In [1]:`\. Do not move on to the next code block while the current block is still running\.
 
 1. After you finish editing the model, return to the Amazon S3 console, choose your bucket name, choose the `test` folder, and then verify that the following artifacts of the edited model are stored in your S3 bucket's test folder\.
-
    + Hotdog\_or\_not\_model\-0000\.params
-
    + Hotdog\_or\_not\_model\-symbol\.json
 
 ## Step 4: Optimize the Model<a name="optimize-model"></a>
 
-Now that you have a trained mxNet model there is one final step that is required before you run the model on the AWS DeepLens’s GPU\. The trained mxNet model does not come in a computationally optimized format\. If we deploy the model in the original format it will run on the CPU via mxNet at sub optimal speed\. In order to run the model at optimal speed on the GPU we need to perform model optimization\.  For instructions on how to optimize your MXNet model, see [Optimizing a Custom Model](deeplens-optimize-model.md)\.
+Now that you have a trained mxNet model there is one final step that is required before you run the model on the AWS DeepLens’s GPU\. The trained mxNet model does not come in a computationally optimized format\. If we deploy the model in the original format it will run on the CPU via mxNet at sub optimal speed\. In order to run the model at optimal speed on the GPU we need to perform model optimization\.  For instructions on how to optimize your MXNet model, see [Optimize a Custom Model](deeplens-optimize-model.md)\.
 
 ## Step 5: Import the Model<a name="import-model"></a>
 
@@ -166,7 +164,7 @@ Import the edited model into AWS DeepLens\.
 
 ## Step 6: Create an Inference Lambda Function<a name="create-lambda"></a>
 
-Use the AWS Lambda console to create a Lambda function that uses your model\. For specific instructions with sample code, see [Creating an AWS DeepLens Inference Lambda Function](deeplens-inference-lambda-create.md)\.
+Use the AWS Lambda console to create a Lambda function that uses your model\. For specific instructions with sample code, see [Create and Publish an AWS DeepLens Inference Lambda Function](deeplens-inference-lambda-create.md)\.
 
 ## Step 7: Create a New AWS DeepLens Project<a name="create-new-project"></a>
 
@@ -186,7 +184,7 @@ Now create a new AWS DeepLens project and add the edited model to it\.
 
 1. Search for and choose the model that you just created, then choose **Add model**\.
 
-1. Choose **Add function**, then choose **deeplens\-hotdog\-o\-hotdog**, then choose **Add function**\.
+1. Choose **Add function**, then choose, for example, **deeplens\-hotdog\-no\-hotdog**, then choose **Add function**\.
 
 1. Choose **Create**\.
 
@@ -204,4 +202,4 @@ Deploying a project incurs costs for the various AWS services that are used\.
 
 ## Step 9: View Your Model's Output<a name="view-model-output"></a>
 
-To view your model's output, follow the instructions at [Viewing AWS DeepLens Project Output](deeplens-viewing-output.md)\.
+To view your model's output, follow the instructions at [Viewing AWS DeepLens Output Streams](deeplens-viewing-output.md)\.

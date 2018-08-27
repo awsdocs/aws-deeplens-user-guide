@@ -1,8 +1,8 @@
-# Updating Your AWS DeepLens Device<a name="deeplens-manual-updates"></a>
+# Update Your AWS DeepLens Device<a name="deeplens-manual-updates"></a>
 
-When you set up your device, you had the option to enable automatic updates \(see Step 3:iii in [Set Up Your AWS DeepLens Device](deeplens-getting-started-set-up.md)\)\. If you enabled automatic updates, you don't need to do anything more to update the software on your device\. If you didn't enable automatic updates, you need to manually update your device periodically\.
+When you set up your device, you had the option to enable automatic updates \(see [Set Up Your AWS DeepLens Device](deeplens-getting-started-set-up.md)\)\. If you enabled automatic updates, you need only to reboot the device to get the software updated on your device\. If you didn't enable automatic updates, you need to manually update your device periodically\.
 
-**To manually update your AWS DeepLens using your password**
+**To manually update your AWS DeepLens on the device**
 
 1. Plug in your AWS DeepLens and turn it on\.
 
@@ -20,7 +20,7 @@ When you set up your device, you had the option to enable automatic updates \(se
    sudo reboot
    ```
 
-**To manually update your AWS DeepLens using your IP address**
+**To manually update your AWS DeepLens using an SSH terminal**
 
 1. Find your IP address by either logging into Ubuntu\. or looking at your Wi\-Fi router\. 
 

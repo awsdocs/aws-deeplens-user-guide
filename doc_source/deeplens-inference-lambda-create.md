@@ -1,8 +1,16 @@
-# Creating an AWS DeepLens Inference Lambda Function<a name="deeplens-inference-lambda-create"></a>
+# Create and Publish an AWS DeepLens Inference Lambda Function<a name="deeplens-inference-lambda-create"></a>
 
-In this topic, you create an inference Lambda function that performs three key functions: preprocessing, inference, and postprocessing\. Each step is accompanied by the associated code\. For the complete function code, see [The Completed Lambda Function](#deeplens-inference-lambda-complete)\.
+Besides importing your custom model, you must create and publish an inference Lambda function to make inference of image frames from the video streams captured by your AWS DeepLens device, unless an existing and published Lambda function meet your application requirements\. 
 
-**To create an AWS DeepLens inference Lambda function**
+Because the AWS DeepLens device is an [AWS Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is run on the device in a Lambda runtime as part of the AWS Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
+
+To have all the essential AWS Greengrass dependencies included automatically, you can use the Lambda function blueprint of `greengrass-hello-world` as a starting point to create the AWS DeepLens inference function\. 
+
+The engine for AWS DeepLens inference is the [`awscam` module](deeplens-library-awscam-module.md) of the [AWS DeepLens device library](deeplens-device-library.md)\. Models trained in a supported framework must be optimized to run on your AWS DeepLens device\. Unless your model is already optimized, you must use the model optimization module \([`mo`](deeplens-model-optimizer-api.md)\) of the device library to convert framework\-specific model artifacts to the AWS DeepLens\-compliant model artifacts that are optimized for the device hardware\. 
+
+In this topic, you learn how to create an inference Lambda function that performs three key functions: preprocessing, inference, and post processing\. For the complete function code, see [The Complete Inference Lambda Function](#deeplens-inference-lambda-complete)\.
+
+**To create and publish an inference Lambda function for your AWS DeepLens project**
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
@@ -14,7 +22,7 @@ In this topic, you create an inference Lambda function that performs three key f
 
 1. In the **Basic information** section:
 
-   1. Type a name for your Lambda function\.
+   1. Type a name for your Lambda function, for example, `deeplens-my-object-inferer`\. The function name must start with `deeplens`\.
 
    1. From the **Role** list, choose **Choose an existing role**\.
 
@@ -22,348 +30,376 @@ In this topic, you create an inference Lambda function that performs three key f
 
 1. Scroll to the bottom of the page and choose **Create function**\.
 
-1. In the function code box, makes sure that the handler is `greengrassHelloWorld.function_handler`\. The name of the function handler must match the name of the Python script that you want to run\. In this case, you are running the `greengrassHelloWorld.py` script, so the name of the function handler is `greengrassHelloWorld.function_handler`\.
+1. In the function code box, make sure that the handler is `greengrassHelloWorld.function_handler`\. The name of the function handler must match the name of the Python script that you want to run\. In this case, you are running the `greengrassHelloWorld.py` script, so the name of the function handler is `greengrassHelloWorld.function_handler`\.
 
-1. Delete all of the code in the `GreengrassHelloWorld.py` box and replace it with the code that you generate in the rest of this procedure\.
+1. Delete all of the code in the `greengrassHelloWorld.py` box and replace it with the code that you generate in the rest of this procedure\.
 
-1. Add the following code to your Lambda function\.
+   Here, we use the Cat and Dog Detection project function as an example\.
 
-   1. Import these required packages:
+1. Follow the steps below to add code for your Lambda function to the code editor  for the `greengrassHelloWorld.py` file\.
 
-      + `os`—Allows your Lambda function to access the AWS DeepLens operating system\.
-
-      + `awscam`—Allows your Lambda function to use the AWS DeepLens Device Library\. For more information, see [Model](deeplens-device-library-awscam-model.md)\.
-
-      + `mo` — Allows your Lambda function to access the AWS DeepLens model optimizer\. For more information, see [AWS DeepLens Model Optimzer API](deeplens-model-optimizer-api.md)\.
-
-      + `cv2`—Allows your Lambda function to access the Open CV library, which contains tools for image preprocessing\.
-
-      + `thread`—Allows your Lambda function to access Python's multi\-threading library\.
-
-      To import these packages, copy and paste the following code into the `GreengrassHello` file\.
+   1. Import dependent modules:
 
       ```
+      from threading import Thread, Event
       import os
+      import json
+      import numpy as np
       import awscam
-      import mo
       import cv2
-      from threading import Thread
+      import greengrasssdk
       ```
 
-   1. Create a Greengrass SDK client\. You will use this client to send messages to the cloud\.
+      where,
+      + The `os` module allows your Lambda function to access the AWS DeepLens device operating system\.
+      + The `json` module lets your Lambda function work with JSON data\.
+      + The `awscam` module allows your Lambda function to use the [AWS DeepLens device library](deeplens-device-library.md)\. For more information, see [Model Object](deeplens-device-library-awscam-model.md)\.
+      + The `mo` module allows your Lambda function to access the AWS DeepLens model optimizer\. For more information, see [Model Optimization \(mo\) Module](deeplens-model-optimizer-api.md)\.
+      + The `cv2` module lets your Lambda function access the [Open CV](https://pypi.org/project/opencv-python/) library used for image preprocessing, including local display of frames from video feeds originating from the device\.
+      + The `greengrasssdk` module exposes the AWS Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
+      + The `threading` module allows your Lambda function to access Python's multi\-threading library\.
+
+   1.  Append the following Python code as a helper class for local display of the inference results:
 
       ```
-      client = greengrasssdk.client('iot-data')
+      class LocalDisplay(Thread):
+          """ Class for facilitating the local display of inference results
+              (as images). The class is designed to run on its own thread. In
+              particular the class dumps the inference results into a FIFO
+              located in the tmp directory (which lambda has access to). The
+              results can be rendered using mplayer by typing:
+              mplayer -demuxer lavf -lavfdopts format=mjpeg:probesize=32 /tmp/results.mjpeg
+          """
+          def __init__(self, resolution):
+              """ resolution - Desired resolution of the project stream """
+              # Initialize the base class, so that the object can run on its own
+              # thread.
+              super(LocalDisplay, self).__init__()
+              # List of valid resolutions
+              RESOLUTION = {'1080p' : (1920, 1080), '720p' : (1280, 720), '480p' : (858, 480)}
+              if resolution not in RESOLUTION:
+                  raise Exception("Invalid resolution")
+              self.resolution = RESOLUTION[resolution]
+              # Initialize the default image to be a white canvas. Clients
+              # will update the image when ready.
+              self.frame = cv2.imencode('.jpg', 255*np.ones([640, 480, 3]))[1]
+              self.stop_request = Event()
+      
+          def run(self):
+              """ Overridden method that continually dumps images to the desired
+                  FIFO file.
+              """
+              # Path to the FIFO file. The lambda only has permissions to the tmp
+              # directory. Pointing to a FIFO file in another directory
+              # will cause the lambda to crash.
+              result_path = '/tmp/results.mjpeg'
+              # Create the FIFO file if it doesn't exist.
+              if not os.path.exists(result_path):
+                  os.mkfifo(result_path)
+              # This call will block until a consumer is available
+              with open(result_path, 'w') as fifo_file:
+                  while not self.stop_request.isSet():
+                      try:
+                          # Write the data to the FIFO file. This call will block
+                          # meaning the code will come to a halt here until a consumer
+                          # is available.
+                          fifo_file.write(self.frame.tobytes())
+                      except IOError:
+                          continue
+      
+          def set_frame_data(self, frame):
+              """ Method updates the image data. This currently encodes the
+                  numpy array to jpg but can be modified to support other encodings.
+                  frame - Numpy array containing the image data of the next frame
+                          in the project stream.
+              """
+              ret, jpeg = cv2.imencode('.jpg', cv2.resize(frame, self.resolution))
+              if not ret:
+                  raise Exception('Failed to set frame data')
+              self.frame = jpeg
+      
+          def join(self):
+              self.stop_request.set()
       ```
 
-   1. Create an AWS IoT topic for your Lambda function's messages\. You can access this topic in the AWS IoT console\.
+      The helper class \(`LocalDisplay`\) is a subclass of [https://docs.python.org/2.0/lib/thread-objects.html](https://docs.python.org/2.0/lib/thread-objects.html)\. It encapsulates the process to stream processed video frames for local display on the device or using a web browser: 
+
+      1.  Exposes a constructor \(`__init__(self, resolution)`\) to initiate the `LocalDisplay` class with the specified image size \(`resolution`\)\.
+
+      1. Overrides the `run` method, which will be invoked by the `Thread.start` method, to support continuous writing images to the specified file \(`result_path`\) on the device\. The Lambda function can write to files only in the `/tmp` directory\. To view the images in this file \(`/tmp/results.mjpeg`\), start `mplayer` on a device terminal window as follows:
+
+         ```
+         mplayer -demuxer lavf -lavfdopts format=mjpeg:probesize=32 /tmp/results.mjpeg
+         ```
+
+      1.  Exposes the `set_frame_data` method for the main inference function to call to update image data by encoding a project stream frame to JPG \(`set_frame_data`\)\. The example code can be modified to support other encodings\. 
+
+      1. Exposes the `join` method to turn waiting threads active by setting the [https://docs.python.org/2.0/lib/event-objects.html](https://docs.python.org/2.0/lib/event-objects.html) object's internal flag to true\.
+
+   1.  Append to the code editor the following Python code that initializes looping through the inference logic, frame by frame:
 
       ```
-      iot_topic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
+      def infinite_infer_run():
+          """ Entry point of the lambda function"""
+          try:
+              # This cat-dog model is implemented as binary classifier, since the number
+              # of labels is small, create a dictionary that converts the machine
+              # labels to human readable labels.
+              model_type = 'classification'
+              output_map = {0: 'dog', 1: 'cat'}
+      
+              # Create an IoT client for sending to messages to the cloud.
+              client = greengrasssdk.client('iot-data')
+              iot_topic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
+      
+              # Create a local display instance that will dump the image bytes to a FIFO
+              # file that the image can be rendered locally.
+              local_display = LocalDisplay('480p')
+              local_display.start()
+      
+              # The sample projects come with optimized artifacts, hence only the artifact
+              # path is required.
+              model_path = '/opt/awscam/artifacts/mxnet_resnet18-catsvsdogs_FP32_FUSED.xml'
+      
+              # Load the model onto the GPU.
+              client.publish(topic=iot_topic, payload='Loading action cat-dog model')
+              model = awscam.Model(model_path, {'GPU': 1})
+              client.publish(topic=iot_topic, payload='Cat-Dog model loaded')
+      
+              # Since this is a binary classifier only retrieve 2 classes.
+              num_top_k = 2
+      
+              # The height and width of the training set images
+              input_height = 224
+              input_width = 224
+      
+              # Do inference until the lambda is killed.
+              while True:
+                  # inference loop to add. See the next step 
+                  ...
+      
+      
+          except Exception as ex:
+              client.publish(topic=iot_topic, payload='Error in cat-dog lambda: {}'.format(ex))
       ```
 
-   1. To view the output locally with mplayer, declare a global variable that contains the \.jpeg image that you send to the FIFO file `results.mjpeg`\.
+      The inference initialization proceeds as follows: 
+
+      1. Specifies the model type \(`model_type`\), model artifact path \(`model_path`\) to load the model artifact \([`awscam.Model`](deeplens-device-library-awscam-model-constructor.md)\), specifying whether the model is loaded into the device's GPU \(`{'GPU':1}`\) or CPU \(`{'CPU':0}`\)\. We don't recommend using the CPU because it is much less efficient\. The model artifacts are deployed to the device in the `/opt/awscam/artifacts` directory\. For the artifact optimized for DeepLens, it consists of an `.xml` file located in this directory\. For the artifact not yet optimized for DeepLens, it consists of a JSON file and a another file with the `.params` extension located in the same directory\. For optimized model artifact file path, set the `model_path` variable to a string literal: 
+
+         ```
+         model_path = "/opt/awscam/artifacts/<model-name>.xml"
+         ```
+
+         In this example, `<model-name>` is `mxnet_resnet18-catsvsdogs_FP32_FUSED`\. 
+
+         For unoptimized model artifacts, use the [`mo.optimize`](deeplens-model-optimizer-api-functions_and_objects.md) function to optimized the artifacts and to obtain the `model_path` value of a given model name \(`<model_name>`\):
+
+         ```
+         error, model_path = mo.optimize(<model_name>, input_width, input_height)
+         ```
+
+         Here, the `model_name` value should be the one you specified when [importing the model](deeplens-import-external-trained.md)\. You can also determine the model name by inspecting the S3 bucket for the model artifacts or the local directory of `/opt/awscam/artifacts` on your device\. For example, unoptimized model artifacts output by MXNet consists of a `<model-name>-symbol.json` file and a `<model-name>-0000`\.params file\. If a model artifact consists of the following two files: `hotdog_or_not_model-symbol.json` and `hotdog_or_not_model-0000.params`, you specify `hotdog_or_not_model` as the input `<model_name>` value when calling `mo.optimize`\.
+
+      1. Specifies `input_width` and `input_height` as the width and height in pixels of images used in training\. To ensure meaningful inference, you must convert input image for inference to the same size\. 
+
+      1. Specifies as part of initialization the model type \([`model_type`](deeplens-device-library-awscam-model-parseresult.md)\) and declares the output map \(`output_map`\)\. In this example, the model type is `classification`\. Other model types are `ssd` \(single shot detector\) and `segmentation`\. The output map will be used to map an inference result label from a numerical value to a human readable text\. For binary classifications, there are only two labels \(`0` and `1`\)\. 
+
+         The `num_top_k ` variable refers to the number of inference result of the highest probability\. The value can range from 1 to the maximum number of classifiers\. For binary classification, it can be `1` or `2`\.
+
+      1. Instantiates an AWS Greengrass SDK \(`greengrasssdk`\) to make the inference output available to the AWS Cloud, including sending process info and processed result to an AWS IoT topic \(`iot_topic`\) that provides another means to view your AWS DeepLens project output, although as JSON data, instead of a video stream\.
+
+      1. Starts a thread \(`local_display.start`\) to feed parsed video frames for local display \(`LocalDisplay`\), [on device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) or [using a web browser](deeplens-viewing-device-output-in-browser.md)\.
+
+   1.  Replace the inference loop placeholder \(`...`\) above with the following code segment:
 
       ```
-      jpeg = None
-      Write_To_FIFO = True 
-      # making Write_To_FIFO = False kills the thread so you cannot view your output over mplayer
+                  # Get a frame from the video stream
+                  ret, frame = awscam.getLastFrame()
+                  if not ret:
+                      raise Exception('Failed to get frame from the stream')
+                  # Resize frame to the same size as the training set.
+                  frame_resize = cv2.resize(frame, (input_height, input_width))
+                  # Run the images through the inference engine and parse the results using
+                  # the parser API, note it is possible to get the output of doInference
+                  # and do the parsing manually, but since it is a classification model,
+                  # a simple API is provided.
+                  parsed_inference_results = model.parseResult(model_type,
+                                                               model.doInference(frame_resize))
+                  # Get top k results with highest probabilities
+                  top_k = parsed_inference_results[model_type][0:num_top_k]
+                  # Add the label of the top result to the frame used by local display.
+                  # See https://docs.opencv.org/3.4.1/d6/d6e/group__imgproc__draw.html
+                  # for more information about the cv2.putText method.
+                  # Method signature: image, text, origin, font face, font scale, color, and tickness
+                  cv2.putText(frame, output_map[top_k[0]['label']], (10, 70),
+                              cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 165, 20), 8)
+                  # Set the next frame in the local display stream.
+                  local_display.set_frame_data(frame)
+                  # Send the top k results to the IoT console via MQTT
+                  cloud_output = {}
+                  for obj in top_k:
+                      cloud_output[output_map[obj['label']]] = obj['prob']
+                  client.publish(topic=iot_topic, payload=json.dumps(cloud_output))
       ```
 
-   1. To publish the output images to the FIFO file and view them with mplayer, create a class that runs on its own thread\.
+      The frame\-by\-frame inference logic flows as follows: 
 
-      ```
-      class FIFO_Thread(Thread):
-                     def __init__(self):
-                        '''Constructor.'''
-                        Thread.__init__(self)
-                  
-                     def run(self):
-                        fifo_path = "/tmp/results.mjpeg"
-                        if not os.path.exists(fifo_path):
-                           os.mkfifo(fifo_path)
-                        f = open(fifo_path,'w')
-                        client.publish(topic=iot_topic, payload="Opened Pipe")
-                  
-                        while Write_To_FIFO
-                           try:
-                              f.write(jpeg.tobytes())
-                           except IOError as e:
-                              continue
-      ```
+      1.  Captures a frame from the DeepLens device video feed \([`awscam.getLastFrame()`](deeplens-device-library-awscam-model-get-last-frame.md)\)\. 
 
-   1. Define an inference class\.
+      1. Processes the captured input frame \(`cv2.resize(frame, (input_height, input_width))`\) to ensure that its dimensions match the dimensions of the frame that the model was trained on\. Depending on the model training, you might need to perform other preprocessing steps, such as image normalization\.
 
-      1. Define an AWS Greengrass inference function\. `input_width` and `input_height` define the width and height of the input in pixels\. To perform inference, the model expects frames of this size\. You can customize these values for the model that you are deploying to AWS DeepLens\.
+      1. Performs inference on the frame based on the specified model: `result = model.doInference(frame_resize)`\.
 
-         ```
-         def greengrass_infinite_infer_run():
-         input_width  = 224
-         input_height = 224
-         ```
+      1. Parses the inference result: `model.parseResult(model_type, result)`\.
 
-      1. Name the model\. The name is the prefix of the trained model's `params` and `json` files\. For example, if the files are named `squeezenet_v1.1-0000.params` and `squeezenet_v1.1-0000.json`, the model name is the prefix `squeezenet_v1.1`\.
-**Important**  
-The model name must match the prefix\. Otherwise, the model can't perform inference, and generates an error\.
+      1.  Sends the frame to the local display stream: `local_display.set_frame_data`\. If you want to show the human\-readable label of the most likely category in the local display, add the label to the captured frame: `cv2.putText`\. If not, ignore the last step\. 
 
-         ```
-         model_name = 'squeezenet_v1'
-         ```
+      1. Sends the inferred result to IoT: `client.publish`\.
 
-      1. Initialize the model optimizer\. The model optimizer converts the deployed model to clDNN format, which is accessible to the AWS DeepLens GPU\. The model optimizer returns the path to the post\-optimized artifacts\.
+   1. Choose **Save** to save the code you entered\.
 
-         ```
-         error, model_path = mo.optimize(model_name, input_width, input_height)
-         ```
-
-      1. Load the model into the inference engine\. To use the CPU, instead of the GPU, specify `"GPU":0`\. The CPU is much less efficient, so we don't recommend using it\.
-
-         ```
-         model = awscam.Model(model_path,{"GPU":1})
-         # You can send a message to AWS IoT to show that the model is loaded.
-         client.publish(topic=iot_topic, payload="Model loaded.")
-         ```
-
-      1. Define the type of model that you are running\. The options are:
-
-         + `segmentation`—For neural style transfer\.
-
-         + `ssd`—Single shot detector\. For object localization it includes a definition of the locale in the frame that the object occupies by drawing a bounding box around the object\.
-
-         + `classification`—For image classification\.
-
-         Because you are deploying a SqueezeNet model that classifies images, define the model type as `classification`\.
-
-         ```
-         model_type = "classification"
-         ```
-
-      1. Map the numeric label generated by the model to a human\-readable label\. Because squeezenet\_v1\.1 has 1,000 classifiers, it's unrealistic to create the mapping in code\. Instead, add a text file to the Lambda \.zip file\. You can then load the labels into a list where the index of the list represents the label returned by the network\.
-
-         ```
-         with open('sysnet.txt', 'r') as f:
-            labels = [l.rstrip() for l in f]
-         ```
-
-      1. Define the number of classifiers that you want to see in the output\.
-
-         ```
-         topk = 5
-         ```
-
-         The value `5` specifies that the top 5 values with the highest probability are output, in descending order\. You can specify any value as long as it's supported by the model\.
-
-      1. Start the FIFO thread so you can view the output with the mplayer\.
-
-         ```
-         results_thread = FIFO_Thread()
-            results_thread.start()
-            # You can publish an "Inference starting" message to the AWS IoT console.
-            client.publish(topic = iot_topic, payload = "Inference starting")
-         ```
-
-      1. Get the most recent frame from the AWS DeepLens camera\. If the latest frame is not returned, raise an exception\.
-
-         ```
-         ret, frame = awscam.getLastFrame()
-         if ret == False:
-           raise Exception("Failed to get frame from the stream")
-         ```
-
-      1. Preprocess the input frame from the camera by making sure that its dimensions match the dimensions of the frame that the model was trained on\. To resize the input frame, specify the input dimensions defined earlier, `input_width` and `input_height`\. Depending on the model that you trained, you might need to perform other preprocessing steps, such as image normalization\.
-
-         ```
-         frame_resize = cv2.resize(frame, (input_width, input_height))
-         ```
-
-      1. Perform inference on the resized frame\.
-
-         ```
-         infer_output = mdel.doInference(frame_resize)
-         ```
-
-      1. Parse the results\.
-
-         ```
-         parsed_results = model.parseResult(model_type, infer_output)
-         ```
-
-      1. Display only the *n* results that have the highest probability\.
-
-         ```
-         top_k = parsed_results[model_type][0:topk]
-         ```
-
-      1. Send the results to the cloud\.
-
-         First, put the message in JSON format\. This allows other Lambda functions in the cloud to subscribe to the AWS IoT topic and perform actions when they detect an interesting event\.
-
-         ```
-         msg = "{"
-            prob_num = 0
-            for obj in top_k
-               if prob_num == topk-1:
-                  msg += '"{}":{:.2f}'.format(labels[obj["label"]],obj["prob"])
-               else:
-                  msg += '"{}":{:.2f},'.format(labels[obj["label"]], obj["prob"])
-               prob_num += 1
-            msg += "}"
-         ```
-
-         Then send it to the cloud\.
-
-         ```
-         client.publish(topic="iot_topic, payload = msg)
-         ```
-
-      1. Postprocess the image\. In this case add a line of text to the image: a label of the most likely results\.
-
-         ```
-         cv2.putText(frame, labels[top_k[0]["label"]], (0,22), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 165, 20), 4) 
-         ```
-
-      1. Update the global jpeg variable so you can view the results with mplayer\.
-
-         ```
-         global jpeg
-         ret, jpeg = cv2.imencode('.jpg', frame)
-         # If you want, you can add exception handling as follows. 
-         #    Don’t forget to put the preceding code in a try block.
-         except Exception as e:
-            msg = "Lambda function failed: " + str(e)
-            client.publish(topic=iot_topic, payload = msg)
-         ```
-
-      1. Run the function and view the results\.
-
-         ```
-         greengrass_infinite_infer_run()
-         ```
-
-Make sure that you save and publish the function code\. If you don't, you can't view the inference Lambda function that you just created in the AWS DeepLens console\.
+   1. From the **Actions** dropdown menu list, choose **Publish new version**\. Publishing the function makes it available in the AWS DeepLens console so that you can add it to your custom project\.
 
 For questions or help, see the AWS DeepLens forum at [Forum: AWS DeepLens](https://forums.aws.amazon.com/forum.jspa?forumID=275&start=0)\.
 
-## The Completed Lambda Function<a name="deeplens-inference-lambda-complete"></a>
+## The Complete Inference Lambda Function<a name="deeplens-inference-lambda-complete"></a>
 
-The following code creates the Lambda function that allows AWS DeepLens to access deployed models\.
+The following code shows the complete Lambda function that, when deployed to the AWS DeepLens device, infers video frames captured from the device to be a cat or dog, based on the model serialized in the model file of `mxnet_resnet18-catsvsdogs_FP32_FUSED.xml` under the `/opt/awscam/artifacts/` directory\. 
 
 ```
-# ----------------------------------- 
-# Copyright Amazon AWS DeepLens, ©2018
-# -----------------------------------
-import os                      # access to operating system for AWS DeepLens
-import awscam                  # access to AWS DeepLens Device Library
-import mo                      # access to AWS DeepLens model optimizer
-import cv2                     # access to Open CV library
-from threading import Thread   # access to Python's multi-threading library
+#*****************************************************
+#                                                    *
+# Copyright 2018 Amazon.com, Inc. or its affiliates. *
+# All Rights Reserved.                               *
+#                                                    *
+#*****************************************************
+""" A sample lambda for cat-dog detection"""
+from threading import Thread, Event
+import os
+import json
+import numpy as np
+import awscam
+import cv2
+import greengrasssdk
 
-# create a Greengrasscore SDK client
-client = greengrasssdk.client('iot-data')
+class LocalDisplay(Thread):
+    """ Class for facilitating the local display of inference results
+        (as images). The class is designed to run on its own thread. In
+        particular the class dumps the inference results into a FIFO
+        located in the tmp directory (which lambda has access to). The
+        results can be rendered using mplayer by typing:
+        mplayer -demuxer lavf -lavfdopts format=mjpeg:probesize=32 /tmp/results.mjpeg
+    """
+    def __init__(self, resolution):
+        """ resolution - Desired resolution of the project stream """
+        # Initialize the base class, so that the object can run on its own
+        # thread.
+        super(LocalDisplay, self).__init__()
+        # List of valid resolutions
+        RESOLUTION = {'1080p' : (1920, 1080), '720p' : (1280, 720), '480p' : (858, 480)}
+        if resolution not in RESOLUTION:
+            raise Exception("Invalid resolution")
+        self.resolution = RESOLUTION[resolution]
+        # Initialize the default image to be a white canvas. Clients
+        # will update the image when ready.
+        self.frame = cv2.imencode('.jpg', 255*np.ones([640, 480, 3]))[1]
+        self.stop_request = Event()
 
-# create AWS IoT for the Lambda function to send messages
-iot_topic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
+    def run(self):
+        """ Overridden method that continually dumps images to the desired
+            FIFO file.
+        """
+        # Path to the FIFO file. The lambda only has permissions to the tmp
+        # directory. Pointing to a FIFO file in another directory
+        # will cause the lambda to crash.
+        result_path = '/tmp/results.mjpeg'
+        # Create the FIFO file if it doesn't exist.
+        if not os.path.exists(result_path):
+            os.mkfifo(result_path)
+        # This call will block until a consumer is available
+        with open(result_path, 'w') as fifo_file:
+            while not self.stop_request.isSet():
+                try:
+                    # Write the data to the FIFO file. This call will block
+                    # meaning the code will come to a halt here until a consumer
+                    # is available.
+                    fifo_file.write(self.frame.tobytes())
+                except IOError:
+                    continue
 
-# global variable to contain jpeg image
-jpeg = None
-Write_To_FIFO = True 
-# making Write_To_FIFO = False kills the thread so you cannot view your output over mplayer
+    def set_frame_data(self, frame):
+        """ Method updates the image data. This currently encodes the
+            numpy array to jpg but can be modified to support other encodings.
+            frame - Numpy array containing the image data of the next frame
+                    in the project stream.
+        """
+        ret, jpeg = cv2.imencode('.jpg', cv2.resize(frame, self.resolution))
+        if not ret:
+            raise Exception('Failed to set frame data')
+        self.frame = jpeg
 
-# create a simple class that runs on its own thread so we can publish output images
-#    to the FIFO file and view using mplayer
-class FIFO_Thread(Thread):
-   def __init__(self):
-      '''Constructor.'''
-      Thread.__init__(self)
-            
-   def run(self):
-      fifo_path = "/tmp/results.mjpeg"
-      if not os.path.exists(fifo_path):
-         os.mkfifo(fifo_path)
-      f = open(fifo_path,'w')
-      client.publish(topic=iot_topic, payload="Opened Pipe")
-            
-      while Write_To_FIFO
-         try:
-            f.write(jpeg.tobytes())
-         except IOError as e:
-            continue
+    def join(self):
+        self.stop_request.set()
 
-# define inference class within the Lambda function
-def greengrass_infinite_infer_run():
-   input_width  = 224
-   input_height = 224
+def infinite_infer_run():
+    """ Entry point of the lambda function"""
+    try:
+        # This cat-dog model is implemented as binary classifier, since the number
+        # of labels is small, create a dictionary that converts the machine
+        # labels to human readable labels.
+        model_type = 'classification'
+        output_map = {0: 'dog', 1: 'cat'}
+        # Create an IoT client for sending to messages to the cloud.
+        client = greengrasssdk.client('iot-data')
+        iot_topic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
+        # Create a local display instance that will dump the image bytes to a FIFO
+        # file that the image can be rendered locally.
+        local_display = LocalDisplay('480p')
+        local_display.start()
+        # The sample projects come with optimized artifacts, hence only the artifact
+        # path is required.
+        model_path = '/opt/awscam/artifacts/mxnet_resnet18-catsvsdogs_FP32_FUSED.xml'
+        # Load the model onto the GPU.
+        client.publish(topic=iot_topic, payload='Loading action cat-dog model')
+        model = awscam.Model(model_path, {'GPU': 1})
+        client.publish(topic=iot_topic, payload='Cat-Dog model loaded')
+        # Since this is a binary classifier only retrieve 2 classes.
+        num_top_k = 2
+        # The height and width of the training set images
+        input_height = 224
+        input_width = 224
+        # Do inference until the lambda is killed.
+        while True:
+            # Get a frame from the video stream
+            ret, frame = awscam.getLastFrame()
+            if not ret:
+                raise Exception('Failed to get frame from the stream')
+            # Resize frame to the same size as the training set.
+            frame_resize = cv2.resize(frame, (input_height, input_width))
+            # Run the images through the inference engine and parse the results using
+            # the parser API, note it is possible to get the output of doInference
+            # and do the parsing manually, but since it is a classification model,
+            # a simple API is provided.
+            parsed_inference_results = model.parseResult(model_type,
+                                                         model.doInference(frame_resize))
+            # Get top k results with highest probabilities
+            top_k = parsed_inference_results[model_type][0:num_top_k]
+            # Add the label of the top result to the frame used by local display.
+            # See https://docs.opencv.org/3.4.1/d6/d6e/group__imgproc__draw.html
+            # for more information about the cv2.putText method.
+            # Method signature: image, text, origin, font face, font scale, color, and tickness
+            cv2.putText(frame, output_map[top_k[0]['label']], (10, 70),
+                        cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 165, 20), 8)
+            # Set the next frame in the local display stream.
+            local_display.set_frame_data(frame)
+            # Send the top k results to the IoT console via MQTT
+            cloud_output = {}
+            for obj in top_k:
+                cloud_output[output_map[obj['label']]] = obj['prob']
+            client.publish(topic=iot_topic, payload=json.dumps(cloud_output))
+    except Exception as ex:
+        client.publish(topic=iot_topic, payload='Error in cat-dog lambda: {}'.format(ex))
 
-   # define the name of he model
-   model_name = 'squeezenet_v1'
-
-# optimize the model into Cl-DNN format
-error, model_path = mo.optimize(model_name, input_width, input_height)
-
-# load the model into the inference engine
-model = awscam.Model(model_path,{"GPU":1})
-# You can send a message to AWS IoT to show that the model is loaded.
-client.publish(topic=iot_topic, payload="Model loaded.")
-
-# define the type of model
-#   possibilities are:  
-#      segmentation - for neural style transfers 
-#      ssd - (single shot detector) for object localization
-#      classification - for image classification
-model_type = "classification"
-
-# load the labels into a list where the index represents the label returned by the network
-with open('sysnet.txt', 'r') as f:
-   labels = [l.rstrip() for l in f]
-
-# define the number of classifiers to see
-topk = 5
-
-# start the FIFO thread to view the output locally
-results_thread = FIFO_Thread()
-   results_thread.start()
-   # you can publish an "Inference starting" message to the AWS IoT console
-   client.publish(topic = iot_topic, payload = "Inference starting")
-
-# access the latest frame on the mjpeg stream
-ret, frame = awscam.getLastFrame()
-if ret == False:
-  raise Exception("Failed to get frame from the stream")
-
-# resize the frame to the size expected by the model
-frame_resize = cv2.resize(frame, (input_width, input_height))
-
-# do inference on the frame
-infer_output = mdel.doInference(frame_resize)
-
-# parse the results and keep the top topk results
-parsed_results = model.parseResult(model_type, infer_output)
-top_k = parsed_results[model_type][0:topk]
-
-# format the results as JSON and send to the cloud
-msg = "{"
-   prob_num = 0
-   for obj in top_k
-      if prob_num == topk-1:
-         msg += '"{}":{:.2f}'.format(labels[obj["label"]],obj["prob"])
-      else:
-         msg += '"{}":{:.2f},'.format(labels[obj["label"]], obj["prob"])
-      prob_num += 1
-   msg += "}"
-client.publish(topic = iot_topic, payload = msg)
-
-# post-process the image to view it on the mplayer 
-#    add a line of text to the image: a label of the most likely results  
-cv2.putText(frame, labels[top_k[0]["label"]], (0,22), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 165, 20), 4) 
-
-# define a global variable so results can be viewed using mplayer
-global jpeg
-ret, jpeg = cv2.imencode('.jpg', frame)
-# Catch an exception in case something went wrong
-except Exception as e:
-   msg = "Lambda function failed: " + str(e)
-   client.publish(topic=iot_topic, payload = msg)
-
-# run the function and view the results
-greengrass_infinite_infer_run()
+infinite_infer_run()
 ```

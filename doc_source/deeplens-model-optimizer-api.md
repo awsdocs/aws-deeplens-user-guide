@@ -1,12 +1,9 @@
-# AWS DeepLens Model Optimzer API<a name="deeplens-model-optimizer-api"></a>
+# Model Optimization \(mo\) Module<a name="deeplens-model-optimizer-api"></a>
 
-Custom models run inefficiently on the CPU\. To run a custom model efficiently on the GPU, use the AWS DeepLens model optimizer API\. The model optimizer class has a single method, `mo.optimize`, which optimizes your model to Cl\-DNN format so it can run on the GPU\.
+The `mo` Python module is a AWS DeepLens model optimization library that you can use to convert your [Caffe, Apache MXNet, or TensorFlow](deeplens-supported-frameworks.md) model artifacts to AWS DeepLens model artifacts and perform necessary optimization\. 
 
-```
-class mo
-```
+ To optimize a model, call the `mo.optimize` function and specify the appropriate input parameters\. 
 
-Represents an AWS DeepLens model optimizer\.
-
-
-+ [Method mo\.optimize\(\)](deeplens-model-optimizer-api-methods.md)
+**Topics**
++ [mo\.optimize Method](deeplens-model-optimizer-api-functions_and_objects.md)
++ [Troubleshooting the Model Optimizer](deeplens-model-optimizer-api-errors.md)

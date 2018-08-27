@@ -1,10 +1,10 @@
-# Importing an Externally Trained Model<a name="deeplens-import-external-trained"></a>
+# Import an Externally Trained Model<a name="deeplens-import-external-trained"></a>
 
 To use an externally trained model, import it\.
 
 **To import an externally trained model**
 
-1. Sign in to the AWS Management Console and open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+1. Sign in to the AWS Management Console for AWS DeepLens at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. In the navigation pane, choose **Models**, then choose **Import model**\.
 

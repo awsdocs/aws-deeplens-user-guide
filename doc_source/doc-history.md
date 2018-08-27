@@ -1,17 +1,18 @@
 # Document History for AWS DeepLens<a name="doc-history"></a>
-
-The following table describes the additions and changes to documentation for AWS DeepLens\.
-
 + **API version:** 2017\-08\-31 
 
-+ **Latest documentation update:** March 13, 2018
-
-
-****  
+The following table describes the additions and changes to the AWS DeepLens Developer Guide documentation\.
 
 | Change | Description | Date | 
-| --- | --- | --- | 
-| Gluon support | AWS DeepLens adds support for Gluon models\. For more information, see [Gluon Models](deeplens-supported-frameworks.md#deeplens-supported-frameworks-gluon)\. | March 13, 2018 | 
-| Importing from Amazon SageMaker | AWS DeepLens simplifies the process for importing a model trained with Amazon SageMaker\. For more information, see [Importing Your Amazon SageMaker Trained Model](deeplens-import-from-sagemaker.md)\. | February 22, 2018 | 
-| Model optimization | AWS DeepLens adds support for optimizing your custom model so that it runs on the GPU instead of the CPU\. For more information, see: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/deeplens/latest/dg/doc-history.html) | January 31, 2018 | 
-| New guide | This is the first release of the AWS DeepLens Developer Guide\. | November 29, 2017 | 
+| --- |--- |--- |
+| [Support for models created with TensorFlow and Caffe](#doc-history) |  Adds TensorFlow and Caffe as supported modeling frameworks\. For more information see [Supported TensorFlow Models and Layers](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-supported-frameworks-tensorflow.html) and [Supported Caffe Models and Layers](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-supported-frameworks-caffe.html)\. | June 14, 2018 | 
+| [Simplified IAM roles creation](#doc-history) |  Enables creation of required IAM roles to run your AWS DeepLens app project with a single click of a button in the AWS DeepLens console\. For more information, see [Register Your Device](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-register.html)\.   | June 14, 2018 | 
+| [Secure boot](#doc-history) |  Adds secure booting\. The AWS DeepLens device securely boots to prevent the installation of unauthorized operating systems\. For more information see [Securely Boot Your Device](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-secure-boot.html)\.  | June 14, 2018 | 
+| [Integration with Amazon Kinesis Video Streams](#doc-history) |  Uses the Kinesis Video Streams for AWS DeepLens Video library to send video feeds from an AWS DeepLens device to Kinesis Video Streams for a specified period\. The feeds can be used as input for additional vision analysis or as training data for your computer vision deep\-learning model\. For more information, see [AWS DeepLens Kinesis Video Integration Library Module](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-kinesis-video-streams-api.html)\.  | June 14, 2018 | 
+| [Ability to view device output streams in a browser](#doc-history) | Adds support for using a browser to view unprocessed device streams or processed project streams\. For more information, see [View Your AWS DeepLens Device Output in a Browser](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-viewing-device-output-in-browser.html)\.  | June 14, 2018 | 
+| [Named device setup URL](#doc-history) |  Makes the AWS DeepLens device setup app accessible through the URL of `http://deeplens.config`\. For more information see [Set up Your Device](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-set-up.html)\.  | June 5, 2018 | 
+| [Troubleshooting Guide](#doc-history) |  Provides a list of commonly asked questions and answers about troubleshooting common AWS DeepLens issues\. For more information see [Troubleshooting Guide](https://docs.aws.amazon.com/deeplens/latest/dg/troubleshooting-guide.html)\.  | May 3, 2018 | 
+| [Gluon support](#doc-history) | Adds support for Gluon models\. For more information, see [Supported MXNet Models Exposed by the Gluon API](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-supported-frameworks-gluon.html)\. | March 13, 2018 | 
+| [Importing from Amazon SageMaker](#doc-history) |  Simplifies the process for importing a model trained with Amazon SageMaker\. For more information, see [Importing Your Amazon SageMaker\-Trained Model](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-import-from-sagemaker.html)\.  | February 22, 2018 | 
+| [Model optimization](#doc-history) | Adds support for optimizing your custom model so that it runs on the GPU instead of the CPU\. For more information, see [Optimize a Custom Model](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-optimize-model.html) and [Model Optimization \(mo\) Module](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-model-optimizer-api.html)\. | January 31, 2018 | 
+| [AWS DeepLens Developer Guide](#doc-history) |  The first release of the programmer's guide to building edge\-optimized computer vision applications using AWS DeepLens with inference models trained in common deep learning frameworks, including MXNet\.  | November 29, 2017 | 
