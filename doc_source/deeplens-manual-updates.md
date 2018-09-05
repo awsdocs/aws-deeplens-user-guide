@@ -22,7 +22,7 @@ When you set up your device, you had the option to enable automatic updates \(se
 
 **To manually update your AWS DeepLens using an SSH terminal**
 
-1. Find your IP address by either logging into Ubuntu\. or looking at your Wi\-Fi router\. 
+1. Find your IP address by either logging into Ubuntu\ or looking at your Wi\-Fi router\. 
 
 1. Start a terminal and type:
 
