@@ -22,12 +22,19 @@ When you set up your device, you had the option to enable automatic updates \(se
 
 **To manually update your AWS DeepLens using an SSH terminal**
 
-1. Find your IP address by either logging into Ubuntu\. or looking at your Wi\-Fi router\. 
+1. Go to the AWS DeepLens console, and do the following:
 
-1. Start a terminal and type:
+   1. Choose **Devices** from the main navigation pane\.
+
+   1. From the device list, choose your AWS DeepLens device to open the device information page\.
+
+   1. From the **Device details** section, copy a local IP address of the selected AWS DeepLens device\.  
+![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-device-local-ipaddresses.png)
+
+1. Start a terminal and type the following SSH command, using the above example's IP address \(`192.168.1.36`\):
 
    ```
-   ssh aws_cam@IP-address
+   ssh aws_cam@192.168.1.36
    ```
 
 1. Run each of the following commands:
