@@ -78,7 +78,7 @@ If you've chosen **Finish**, follow **Step 1\-3** above to get back to the devic
 
 ## What IAM Roles to Choose When None Is Available?<a name="troubleshooting-device-registration-2"></a>
 
-If [the required IAM roles](deeplens-prerequisites.md#deeplens-required-iam-roles) are not available in your account when you register your device using the AWS DeepLens console for the first, you will be prompted to create the roles with a single click of button\. If you wish to create the required IAM roles  without using the AWS DeepLens console, follow the instructions in [Create IAM Roles for Your AWS DeepLens Project](deeplens-prerequisites.md#deeplens-required-iam-role-create)\.
+If [the required IAM roles](deeplens-required-iam-roles.md) are not available in your account when you register your device using the AWS DeepLens console for the first, you will be prompted to create the roles with a single click of button\. If you wish to create the required IAM roles  without using the AWS DeepLens console, follow the instructions in [Create IAM Roles for Your AWS DeepLens Project](deeplens-required-iam-roles.md#deeplens-required-iam-role-create)\.
 
 ## How to Fix an Incomplete Certificate \(\.zip\) File?<a name="troubleshooting-device-registration-3"></a>
 
