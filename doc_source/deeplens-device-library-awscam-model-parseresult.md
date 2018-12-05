@@ -36,7 +36,7 @@ The output of a classification model might look like the following:
     ]
 }
 ```
-The output of an SDD model contains bounding box information, similar to the following:  
+The output of an SSD model contains bounding box information, similar to the following:  
 
 ```
 {
