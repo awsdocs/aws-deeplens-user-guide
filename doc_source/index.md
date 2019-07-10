@@ -1,7 +1,7 @@
 # AWS DeepLens Developer Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -15,16 +15,28 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What Is AWS DeepLens?](what-is-deeplens.md)
+   + [AWS DeepLens Hardware](deeplens-hardware.md)
+   + [AWS DeepLens Project Workflow](how-deeplens-works.md)
+   + [Supported Modeling Frameworks](supported-frameworks.md)
+   + [Learning AWS DeepLens Application Development](deeplens-first-time-user.md)
 + [Getting Started with AWS DeepLens](deeplens-getting-started.md)
    + [Set Up Your AWS DeepLens Development Environment](deeplens-prerequisites.md)
       + [Sign Up for an AWS Account](deeplens-create-aws-account.md)
       + [Create an IAM User](deeplens-create-iam-user.md)
       + [Set Up Required Permissions](deeplens-required-iam-roles.md)
    + [Register Your AWS DeepLens Device](deeplens-getting-started-register.md)
-      + [Configure Your AWS Account to Use AWS DeepLens](deeplens-start-registering-device-using-console.md)
-      + [Connect to Your AWS DeepLens Device's Wi-Fi Network](deeplens-getting-started-connect.md)
-      + [Set Up Your AWS DeepLens Device](deeplens-getting-started-set-up.md)
-      + [Verify Your AWS DeepLens Device Registration Status](deeplens-getting-started-verify-connection.md)
+      + [Register AWS DeepLens 2019 Edition Device](deeplens-register-device-v1.1.md)
+         + [Step 1: Connect Your AWS DeepLens 2019 Edition Device to Your Computer](deeplens-start-registering-device-using-console-v1_1.md)
+         + [Step 2: Validate Your AWS DeepLens 2019 Edition Device Serial Number](how-to-validate-deeplens-v1.1-device.md)
+         + [Step 3: Set Up Your AWS DeepLens 2019 Edition Device's Internet Connection](how-to-set-up-v1.1-device-connection-to-internet.md)
+         + [Step 4: Name Your AWS DeepLens 2019 Edition Device and Agree to Permissions](how-to-configure-deeplens-v1.1-device.md)
+         + [Step 5: Verify Your AWS DeepLens 2019 Edition Device Registration](how-to-verify-deeplens-v1.1-device-registration.md)
+         + [Step 6: View or Edit Your AWS DeepLens 2019 Edition Device Settings](deeplens-v11-device-view-or-edit-settings.md)
+      + [Register Your AWS DeepLens Device](deeplens-register-device-v1.md)
+         + [Configure Your AWS Account for AWS DeepLens Device](deeplens-start-registering-device-using-console.md)
+         + [Connect to Your AWS DeepLens Device's Wi-Fi Network](deeplens-getting-started-connect.md)
+         + [Set Up Your AWS DeepLens Device](deeplens-getting-started-set-up.md)
+         + [Verify Your AWS DeepLens Device Registration Status](deeplens-getting-started-verify-connection.md)
    + [Test Using Your Registered AWS DeepLens Device](deeplens-test-using-device.md)
       + [Create and Deploy an AWS DeepLens Project](deeplens-create-deploy-project.md)
       + [View Your AWS DeepLens Project Output in the AWS IoT Console](deeplens-viewing-project-output-json.md)
@@ -45,15 +57,16 @@ Amazon's trademarks and trade dress may not be used in
       + [View Your AWS DeepLens Project Output in a Browser](deeplens-viewing-device-output-in-browser.md)
    + [Working with AWS DeepLens Sample Projects](deeplens-sample-projects.md)
       + [AWS DeepLens Sample Projects Overview](deeplens-templated-projects-overview.md)
-      + [Creating and Deploying an AWS DeepLens Sample Project](deeplens-create-deploy-sample-project.md)
-      + [Extending any Project's Functionality](deeplens-extend.md)
-      + [Editing an Existing Model with Amazon SageMaker](deeplens-train-model.md)
+      + [Create and Deploy an AWS DeepLens Sample Project in the AWS DeepLens Console](deeplens-create-deploy-sample-project.md)
+      + [Relay an AWS DeepLens Project Output through AWS SMS](deeplens-extend.md)
+      + [Use Amazon SageMaker to Provision a Pre-trained Model for a Sample Project](deeplens-train-model.md)
    + [Working with AWS DeepLens Custom Projects](deeplens-custom-projects.md)
       + [Import Your Amazon SageMaker Trained Model](deeplens-import-from-sagemaker.md)
       + [Import an Externally Trained Model](deeplens-import-external-trained.md)
       + [Optimize a Custom Model](deeplens-optimize-model.md)
       + [Create and Publish an AWS DeepLens Inference Lambda Function](deeplens-inference-lambda-create.md)
       + [Create and Deploy a Custom AWS DeepLens Project](deeplens-create-custom-project.md)
+      + [Use Amazon SageMaker Neo to Optimize Inference on AWS DeepLens](deeplens-compile-model-with-neo.md)
    + [Building AWS DeepLens Project Tutorials](deeplens-project-tutorials.md)
       + [Build and Run the Head Pose Detection Project with TensorFlow-Trained Model](deeplens-project-headpose-with-tensorflow-model.md)
          + [Get the AWS Sample Project on GitHub](deeplens-headpose-project-source-on-github.md)

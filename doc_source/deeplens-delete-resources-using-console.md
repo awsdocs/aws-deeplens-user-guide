@@ -36,13 +36,13 @@
 
 ## Delete AWS DeepLens Logs from CloudWatch Logs<a name="deeplens-delete-cloudwatch-logs-using-console"></a>
 
-If you exposed personally identifiable information in the AWS Greengrass user logs that were created in Amazon CloudWatch Logs when you ran your AWS DeepLens project, use the CloudWatch Logs console to delete them\. 
+If you exposed personally identifiable information in the AWS IoT Greengrass user logs that were created in Amazon CloudWatch Logs when you ran your AWS DeepLens project, use the CloudWatch Logs console to delete them\. 
 
 1. Sign in to the AWS Management Console and open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 1. In the navigation pane, choose **Logs**\.
 
-1. On the **Log Groups** page, choose the button next to the AWS Greengrass user log that you want to delete\. The log begins with `/aws/greengrass/Lambda/...`\.
+1. On the **Log Groups** page, choose the button next to the AWS IoT Greengrass user log that you want to delete\. The log begins with `/aws/greengrass/Lambda/...`\.
 
 1. In the **Actions** list, choose **Delete log group**\.
 

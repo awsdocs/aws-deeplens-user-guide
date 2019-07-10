@@ -1,6 +1,6 @@
 # Create an IAM User<a name="deeplens-create-iam-user"></a>
 
-The following procedure walks you through the steps to create an [AWS Identity and Access Management \(IAM\) user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html), which is preferred to using the root user of your AWS account, to use AWS DeepLens for your deep learning computer vision applications\. 
+The following procedure walks you through the steps to create an [AWS Identity and Access Management \(IAM\) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html), which is preferred to using the root user of your AWS account, to use AWS DeepLens for your deep learning computer vision applications\. 
 
 **To create an IAM user**
 
@@ -14,7 +14,7 @@ The following procedure walks you through the steps to create an [AWS Identity a
 
 1. Choose whether to require the user to reset the password at the next sign\-in, then choose **Next: Permissions**\.
 
-1. For **Set permissions for *<user name>***, choose **Attach existing policies directly**, **AdministrativeAccess**, and **Next: Review**\.
+1. For **Set permissions for *<user name>***, choose **Attach existing policies directly**, select the check box next to a listed policy, e\.g\., **AdministratorAccess** if you want the user to have the administrator's privileges, and then choose **Next: Review**\.
 
 1. Review the settings\. To return to the previous page to make changes, choose **Previous**\. To create the user, choose **Create user**\.
 

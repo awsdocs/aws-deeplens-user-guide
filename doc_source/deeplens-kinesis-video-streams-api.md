@@ -1,15 +1,12 @@
 # DeepLens\_Kinesis\_Video Module for Amazon Kinesis Video Streams Integration<a name="deeplens-kinesis-video-streams-api"></a>
 
-The Amazon Kinesis Video Streams for AWS DeepLens Video library is a Python module that encapsulates [the Kinesis Video Streams Producer SDK](http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-sdk.html) for AWS DeepLens devices\. Use this module to send video feeds from an AWS DeepLens device to Kinesis Video Streams,and to control when to start and stop video streaming from the device\. This is useful if you need to train your own deep\-learning model\. In this case, you can send video feeds of given time intervals from your AWS DeepLens device to Kinesis Video Streams and use the data as an input for the training\. 
+The Amazon Kinesis Video Streams for AWS DeepLens Video library is a Python module that encapsulates [the Kinesis Video Streams Producer SDK](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-sdk.html) for AWS DeepLens devices\. Use this module to send video feeds from an AWS DeepLens device to Kinesis Video Streams,and to control when to start and stop video streaming from the device\. This is useful if you need to train your own deep\-learning model\. In this case, you can send video feeds of given time intervals from your AWS DeepLens device to Kinesis Video Streams and use the data as an input for the training\. 
 
 The module, DeepLens\_Kinesis\_Video, is already installed on your AWS DeepLens device\. You can call this module in a Lambda function that is deployed to your AWS DeepLens device as part of a AWS DeepLens project\. 
 
 The following Python example shows how to use the DeepLens\_Kinesis\_Video module to stream five\-hour video feeds from the caller's AWS DeepLens device to Kinesis Video Streams\. 
 
 ```
-#
-# Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
 import time
 import os
 import DeepLens_Kinesis_Video as dkv

@@ -56,4 +56,4 @@ The downloaded security certificate for the device is a \.zip file\. Upload the 
  To ensure the setup completes successfully, make sure that AWS DeepLens device has access to ports 8883 and 8443 and is not blocked by your network firewall policy\.   
 If the AWS DeepLens device's connection to the internet repeated turns on and off after you chose **Finish**, restart your home or office Wi\-Fi network\. 
 
- This completes the device registration\. [Verify you device registration status](deeplens-getting-started-verify-connection.md) before moving on to create and deploy a project to your AWS DeepLens device\. 
+ This completes the device registration\. [Verify your device registration status](deeplens-getting-started-verify-connection.md) before moving on to create and deploy a project to your AWS DeepLens device\. 

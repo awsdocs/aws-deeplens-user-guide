@@ -2,9 +2,9 @@
 
 Besides importing your custom model, you must create and publish an inference Lambda function to make inference of image frames from the video streams captured by your AWS DeepLens device, unless an existing and published Lambda function meet your application requirements\. 
 
-Because the AWS DeepLens device is an [AWS Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is run on the device in a Lambda runtime as part of the AWS Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
+Because the AWS DeepLens device is an [AWS IoT Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is run on the device in a Lambda runtime as part of the AWS IoT Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
 
-To have all the essential AWS Greengrass dependencies included automatically, you can use the Lambda function blueprint of `greengrass-hello-world` as a starting point to create the AWS DeepLens inference function\. 
+To have all the essential AWS IoT Greengrass dependencies included automatically, you can use the Lambda function blueprint of `greengrass-hello-world` as a starting point to create the AWS DeepLens inference function\. 
 
 The engine for AWS DeepLens inference is the [`awscam` module](deeplens-library-awscam-module.md) of the [AWS DeepLens device library](deeplens-device-library.md)\. Models trained in a supported framework must be optimized to run on your AWS DeepLens device\. Unless your model is already optimized, you must use the model optimization module \([`mo`](deeplens-model-optimizer-api.md)\) of the device library to convert framework\-specific model artifacts to the AWS DeepLens\-compliant model artifacts that are optimized for the device hardware\. 
 
@@ -36,9 +36,19 @@ In this topic, you learn how to create an inference Lambda function that perform
 
    Here, we use the Cat and Dog Detection project function as an example\.
 
-1. Follow the steps below to add code for your Lambda function to the code editor  for the `greengrassHelloWorld.py` file\.
+1. Follow the steps below to add code for your Lambda function to the code editor for the `greengrassHelloWorld.py` file\.
 
    1. Import dependent modules:
+
+      ```
+      from threading import Thread, Event
+      import os
+      import json
+      import numpy as np
+      import awscam
+      import cv2
+      import greengrasssdk
+      ```
 
       ```
       from threading import Thread, Event
@@ -56,7 +66,7 @@ In this topic, you learn how to create an inference Lambda function that perform
       + The `awscam` module allows your Lambda function to use the [AWS DeepLens device library](deeplens-device-library.md)\. For more information, see [Model Object](deeplens-device-library-awscam-model.md)\.
       + The `mo` module allows your Lambda function to access the AWS DeepLens model optimizer\. For more information, see [Model Optimization \(mo\) Module](deeplens-model-optimizer-api.md)\.
       + The `cv2` module lets your Lambda function access the [Open CV](https://pypi.org/project/opencv-python/) library used for image preprocessing, including local display of frames from video feeds originating from the device\.
-      + The `greengrasssdk` module exposes the AWS Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
+      + The `greengrasssdk` module exposes the AWS IoT Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
       + The `threading` module allows your Lambda function to access Python's multi\-threading library\.
 
    1.  Append the following Python code as a helper class for local display of the inference results:
@@ -207,7 +217,7 @@ In this topic, you learn how to create an inference Lambda function that perform
 
          The `num_top_k ` variable refers to the number of inference result of the highest probability\. The value can range from 1 to the maximum number of classifiers\. For binary classification, it can be `1` or `2`\.
 
-      1. Instantiates an AWS Greengrass SDK \(`greengrasssdk`\) to make the inference output available to the AWS Cloud, including sending process info and processed result to an AWS IoT topic \(`iot_topic`\) that provides another means to view your AWS DeepLens project output, although as JSON data, instead of a video stream\.
+      1. Instantiates an AWS IoT Greengrass SDK \(`greengrasssdk`\) to make the inference output available to the AWS Cloud, including sending process info and processed result to an AWS IoT topic \(`iot_topic`\) that provides another means to view your AWS DeepLens project output, although as JSON data, instead of a video stream\.
 
       1. Starts a thread \(`local_display.start`\) to feed parsed video frames for local display \(`LocalDisplay`\), [on device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) or [using a web browser](deeplens-viewing-device-output-in-browser.md)\.
 
@@ -231,7 +241,7 @@ In this topic, you learn how to create an inference Lambda function that perform
                   # Add the label of the top result to the frame used by local display.
                   # See https://docs.opencv.org/3.4.1/d6/d6e/group__imgproc__draw.html
                   # for more information about the cv2.putText method.
-                  # Method signature: image, text, origin, font face, font scale, color, and tickness
+                  # Method signature: image, text, origin, font face, font scale, color, and thickness
                   cv2.putText(frame, output_map[top_k[0]['label']], (10, 70),
                               cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 165, 20), 8)
                   # Set the next frame in the local display stream.
@@ -388,7 +398,7 @@ def infinite_infer_run():
             # Add the label of the top result to the frame used by local display.
             # See https://docs.opencv.org/3.4.1/d6/d6e/group__imgproc__draw.html
             # for more information about the cv2.putText method.
-            # Method signature: image, text, origin, font face, font scale, color, and tickness
+            # Method signature: image, text, origin, font face, font scale, color, and thickness
             cv2.putText(frame, output_map[top_k[0]['label']], (10, 70),
                         cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 165, 20), 8)
             # Set the next frame in the local display stream.

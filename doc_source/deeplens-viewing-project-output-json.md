@@ -1,6 +1,6 @@
 # View Your AWS DeepLens Project Output in the AWS IoT Console<a name="deeplens-viewing-project-output-json"></a>
 
-After a successful project deployment, your deployed AWS DeepLens project starts to run on your registered AWS DeepLens device\. If the Lambda function of your project uses the AWS Greengrass SDK \(`greengrasssdk`\) to publish text\-based messages to AWS IoT, including JSON\-formatted inference results as is done in all of the AWS DeepLens sample projects, you can view such project output using the [AWS IoT Core console](https://docs.aws.amazon.com/iot/latest/developerguide/iot-console-signin.html)\.
+After a successful project deployment, your deployed AWS DeepLens project starts to run on your registered AWS DeepLens device\. If the Lambda function of your project uses the AWS IoT Greengrass SDK \(`greengrasssdk`\) to publish text\-based messages to AWS IoT, including JSON\-formatted inference results as is done in all of the AWS DeepLens sample projects, you can view such project output using the [AWS IoT Core console](https://docs.aws.amazon.com/iot/latest/developerguide/iot-console-signin.html)\.
 
 If the inference Lambda function uses the [OpenCV Library](https://opencv.org/) \(`cv2`\) module to output inference results as video feeds, you can view the video output using a web browser or connecting to the device directly a monitor, mouse and keyboard\. However, viewing text\-based project output is more economical to verify that your deployed project runs as expected\. <a name="deepelens-view-project-json-output-procedure"></a>
 

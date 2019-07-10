@@ -1,6 +1,6 @@
 # Managing Your AWS DeepLens Device<a name="deeplens-managing-your-device"></a>
 
-The following topics explain how to manage your AWS DeepLens device and access device resource from a AWS Greengrass Lambda function:
+The following topics explain how to manage your AWS DeepLens device and access device resource from a AWS IoT Greengrass Lambda function:
 
 **Topics**
 + [Securely Boot Your AWS DeepLens Device](deeplens-secure-boot.md)

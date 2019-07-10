@@ -158,7 +158,7 @@ The update might get delayed or fail under the following conditions:
 
   ```
   sudo apt-get update
-  sudo apt-get upgrade awscam
+  sudo apt-get install awscam
   ```
 
   Allow several minutes for the update to finish\. If AWS DeepLens reports an error during the upgrade process, see [How to Upgrade the awscam Software Package Dependencies?](#troubleshooting-device-software-awscam-dependencies)\.

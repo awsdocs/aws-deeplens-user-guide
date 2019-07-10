@@ -6,7 +6,7 @@ Represents an AWS DeepLens machine learning model\.
 
 ```
 import awscam
-model = awscam.Model(model_topology_file, loading_config)
+model = awscam.Model(model_topology_file, loading_config, runtime)
 ```
 
 **Topics**

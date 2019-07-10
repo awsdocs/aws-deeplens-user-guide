@@ -13,11 +13,11 @@ Use the following information to troubleshoot issues that occur when deploying m
 
 ## How to Resolve an Access Denied Error Encountered While Downloading a Model After Device Registration Went through without Errors?<a name="troubleshooting-device-registration-11"></a>
 
-When setting permissions during device registration, make sure that you have the IAM role for AWS Greengrass created and the role is associated with the **IAM group role for AWS Greengrass** option on the console when setting permissions during device registration\. If you didn't, reregister the device with the correct roles\.
+When setting permissions during device registration, make sure that you have the IAM role for AWS IoT Greengrass created and the role is associated with the **IAM group role for AWS Greengrass** option on the console when setting permissions during device registration\. If you didn't, reregister the device with the correct roles\.
 
 ## How to Resolve the ModelDownloadFailed Error?<a name="troubleshooting-model-deployment-download"></a>
 
-When using the AWS DeepLens console, you must provide two IAM roles for AWS Greengrass: **IAM Role for AWS Greengrass** and **IAM group role for AWS Greengrass**\. If you specify the same IAM role for both, you get this error\. To fix it, specify `AWSDeepLensGreengrassRole` for the **IAM Role for AWS Greengrass** and `AWSDeepLensGreengrassGroupRole` for the **IAM group role for AWS Greengrass**\.
+When using the AWS DeepLens console, you must provide two IAM roles for AWS IoT Greengrass: **IAM Role for AWS Greengrass** and **IAM group role for AWS Greengrass**\. If you specify the same IAM role for both, you get this error\. To fix it, specify `AWSDeepLensGreengrassRole` for the **IAM Role for AWS Greengrass** and `AWSDeepLensGreengrassGroupRole` for the **IAM group role for AWS Greengrass**\.
 
 ## Resolve Model Optimization Failure Reported As std::bad\_alloc\(\)<a name="troubleshooting-model-deployment-1"></a>
 

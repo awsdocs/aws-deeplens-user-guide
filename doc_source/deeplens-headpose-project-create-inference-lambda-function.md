@@ -304,7 +304,7 @@ def head_detection():
         client.publish(topic=iot_topic, payload="Model loaded")
         # We need to sample a frame so that we can determine where the center of
         # the image is located. We assume that
-        # resolution is constant during the lifetime of the lmabda.
+        # resolution is constant during the lifetime of the Lambda.
         ret, sample_frame = awscam.getLastFrame()
         if not ret:
             raise Exception("Failed to get frame from the stream")

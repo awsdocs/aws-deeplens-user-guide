@@ -37,7 +37,7 @@ res = mo.optimize(model_name, input_width, input_height, platform, aux_inputs)
   Type: `Dict`
 
   Required: No  
-**Valid `axu_inputs` dictionary Entries**    
+**Valid `aux_inputs` dictionary Entries**    
 <a name="table-mo-optimize-aux_inputs-values"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/deeplens/latest/dg/deeplens-model-optimizer-api-functions_and_objects.html)
 
 **Returns**
