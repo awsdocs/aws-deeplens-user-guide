@@ -3,6 +3,7 @@
 Use the following guidelines to troubleshoot issues with AWS DeepLens device registration\.
 
 **Topics**
++ [Why Does My Attempt to Use the AWS DeepLens Console to Register a Device Go into an Apparently Endless Loop and Fail to Complete?](#troubleshooting-device-registration-v1.1-device-no-windows7-ie11)
 + [How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?](#troubleshooting-undetected-v1.1-device)
 + [How to Turn your Device Back to its Setup Mode to Complete Device Registration or Update Device Settings?](#troubleshooting-device-registration-1)
 + [How to Connect Your Device to Your Home or Office Wi\-Fi Network When the Wi\-Fi SSID or Password Contains Special Characters?](#troubleshooting-device-wifi-connection)
@@ -16,6 +17,13 @@ Use the following guidelines to troubleshoot issues with AWS DeepLens device reg
 + [How to Open the Device Setup Page When the Device's Local IP Address \(192\.168\.0\.1\) Is Not Accessible?](#troubleshooting-device-registration-8)
 + [How to Make the Device's Wi\-Fi Network Visible on Your Computer When the Device Wi\-Fi Indicator Is Blinking or After Your Computer Has Connected to the Device?](#troubleshooting-device-registration-9)
 + [How to Fix an Unsuccessful Device Wi\-Fi Reset?](#troubleshooting-device-registration-10)
+
+## Why Does My Attempt to Use the AWS DeepLens Console to Register a Device Go into an Apparently Endless Loop and Fail to Complete?<a name="troubleshooting-device-registration-v1.1-device-no-windows7-ie11"></a>
+
+ When you use the AWS DeepLens console to register a device, if the registration fails to complete after you choose **Register device**, you may have used an unsupported browser\. Make sure that you do not use the following browser: 
+
+**Unsupported Browser for the AWS DeepLens Console**
++  Internet Explorer 11 on Windows 7 
 
 ## How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?<a name="troubleshooting-undetected-v1.1-device"></a>
 

@@ -1,6 +1,6 @@
 # What Is AWS DeepLens?<a name="what-is-deeplens"></a>
 
-AWS DeepLens is a wireless\-enabled video camera and development platform integrated with the AWS Cloud\. It lets you use the latest Artificial Intelligence \(AI\) tools and technology to develop computer vision applications based on a deep learning model\. 
+AWS DeepLens is a deep learning\-enabled video camera\. It is integrated with the Amazon Machine Learning ecosystem and can perform local inference against deployed models provisioned from the AWS Cloud\. It lets you learn and explore the latest Artificial Intelligence \(AI\) tools and technology for developing computer vision applications based on a deep learning model\. 
 
 As a beginner to machine learning, you can use AWS DeepLens to explore deep learning through hands\-on tutorials based on ready\-deployed deep learning sample projects\. Each sample project contains a pre\-trained model and a pedagogically straightforward inference function\. 
 
@@ -15,6 +15,7 @@ To create and run an AWS DeepLens\-based computer vision application project, yo
 This means that you must grant appropriate permissions to access these AWS services\. 
 
 **Topics**
++ [AWS DeepLens Device Versions](deeplens-versions.md)
 + [AWS DeepLens Hardware](deeplens-hardware.md)
 + [AWS DeepLens Project Workflow](how-deeplens-works.md)
 + [Supported Modeling Frameworks](supported-frameworks.md)

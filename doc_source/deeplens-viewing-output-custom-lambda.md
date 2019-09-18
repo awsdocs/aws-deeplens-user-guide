@@ -121,4 +121,4 @@ def function_handler(event, context):
     return
 ```
 
-After you've created and deployed the Lambda function, follow the instructions in [View Your AWS DeepLens Project Output in a Browser](deeplens-viewing-device-output-in-browser.md) or [Viewing a Project Stream on Your AWS DeepLens Device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) to view the processed project stream\. 
+After you've created and deployed the Lambda function, follow the instructions in [View Video Streams from AWS DeepLens Device in Browser](deeplens-viewing-device-output-in-browser.md) or [View Project Streams on Your AWS DeepLens Device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) to view the processed project stream\. 

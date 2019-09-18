@@ -1,4 +1,4 @@
-# View Your AWS DeepLens Project Output in a Browser<a name="deeplens-viewing-device-output-in-browser"></a>
+# View Video Streams from AWS DeepLens Device in Browser<a name="deeplens-viewing-device-output-in-browser"></a>
 
 **Note**  
  To view a project's output in a supported browser, your device must have the `awscam` software version 1\.3\.9 or higher installed\. For information to update the device software, see [Update Your AWS DeepLens Device](deeplens-manual-updates.md)\. 
@@ -6,7 +6,7 @@
 **Note**  
 To view a project's output in Chrome on Mac El Capitan or earlier, you must provide a password to load the streaming certificate for viewing the project output\. If you have such an old Mac operating system and want to use Chrome, skip the procedure below and follow the instructions in [How to View Project Output in the Chrome Browser on Mac El Capitan or Earlier?](troubleshooting-device-registration.md#troubleshooting-view-project-output-in-chrome-on-mac-elcapitan-or-earlier) to set up your browser to view the project output\.<a name="deeplens-view-device-stream-in-browser-proc"></a>
 
-**To view project output in a supported web browser**
+**To view project output from your AWS DeepLens device in a supported web browser**
 
 1. If you have not already downloaded the streaming certificate when [registering your device](deeplens-getting-started-set-up.md) or if you have lost the downloaded copy, do one of the following to download the streaming certificate\. The steps are different depending on whether you use the device setup application or not\.
 
@@ -48,23 +48,13 @@ To view a project's output in Chrome on Mac El Capitan or earlier, you must prov
 
          The example used the `Downloads` folder under the user's home directory \(`~/`\) to transfer the certificate to\. You can choose any other writeable directory as the destination folder\.
 
-   1. Follow one of the following sets of steps to download the streaming certificate from the device setup page, depending on the version of your AWS DeepLens device:
+   1. Follow the following steps to download the streaming certificate for the AWS DeepLens device:
 
-      1. For the AWS DeepLens 2019 Edition device:
+      1. [Return your device to its setup mode, if necessary, and connect your computer to the device's `ADMC-NNNN` Wi\-Fi network](deeplens-getting-started-connect.md)\.
 
-         1. Connect your AWS DeepLens 2019 Edition device to your Computer using the provided USB cable\. On the device, you must use the REGISTRATION USB port\.
+      1. Start the device setup app at `http://deeplens.config`\. 
 
-         1. Go back to the AWS DeepLens console, choose **Devices** from the primary navigation pane, choose the registered device, and choose **Edit device settings** to open the device settings page\. 
-
-         1. Follow the on\-screen instructions to download the streaming certificate for viewing a project's output streams\.
-
-      1. For the AWS DeepLens device:
-
-         1. [Return your device to its setup mode, if necessary, and connect your computer to the device's `ADMC-NNNN` Wi\-Fi network](deeplens-getting-started-connect.md)\.
-
-         1. Start the device setup app at `http://deeplens.config`\. 
-
-         1. Follow the on\-screen instructions to download the streaming certificate for viewing a project's output streams\.
+      1. Follow the on\-screen instructions to download the streaming certificate for viewing a project's output streams\.
 
 1. Import into your supported web browser the streaming certificate you downloaded during the [device registration](deeplens-getting-started-set-up.md#deeplens-set-up-device-procedure)\.
 

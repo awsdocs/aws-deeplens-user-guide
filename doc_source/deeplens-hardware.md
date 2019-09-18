@@ -15,6 +15,10 @@ The following image shows the front and back of the AWS DeepLens hardware\.
 
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-device-view-front-back.png)
 
+The following image shows the front and back of the AWS DeepLens 2019 Edition hardware\.
+
+![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens_2019_edition_device_specs.png)
+
 On the front of the device, the power button is located at the bottom\. Above it are three LED indicators show the device statuses:
 + **Power status** indicates if the device is powered on or off\.
 + **Wi\-Fi** shows if the device is in the setup mode \(blinking\), connected to your home or office network \(steady\) or not connected to the Internet \(off\)\. 
@@ -26,7 +30,7 @@ On the back of the device, you have access to the following:
 
 1. A micro HDMI slot for connecting a display monitor to the device using a micro\-HDMI\-to\-HDMI cable\.
 
-1. Two USB 2\.0 slots for connecting USB mouse and keyboard, or any other USB\-enabled accessories, to the device\.
+1. Two USB 2\.0 \(AWS DeepLens Edition\)/3\.0 \(AWS DeepLens 2019 Edition\) slots for connecting USB mouse and keyboard, or any other USB\-enabled accessories, to the device\.
 
 1. A reset pinhole for turning the device into the setup mode that allows you to make the device as an access point and to connect your laptop to the device to configure the device\.
 

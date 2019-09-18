@@ -1,4 +1,4 @@
-# Step 2: Validate Your AWS DeepLens 2019 Edition Device Serial Number<a name="how-to-validate-deeplens-v1.1-device"></a>
+# Validate Your AWS DeepLens 2019 Edition Device Serial Number<a name="how-to-validate-deeplens-v1.1-device"></a>
 
 After your device is connected to your computer, the AWS DeepLens console will validate the device serial number \(DSN\) to verify that the device is version 1\.1\. 
 

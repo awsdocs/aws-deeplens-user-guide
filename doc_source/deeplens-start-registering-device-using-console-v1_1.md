@@ -1,4 +1,4 @@
-# Step 1: Connect Your AWS DeepLens 2019 Edition Device to Your Computer<a name="deeplens-start-registering-device-using-console-v1_1"></a>
+# Connect Your AWS DeepLens 2019 Edition Device to Your Computer<a name="deeplens-start-registering-device-using-console-v1_1"></a>
 
 To use a computer to register your AWS DeepLens 2019 Edition device, you must first connect the device to your computer\. To connect your device to your computer, follow the steps below\.
 
@@ -16,7 +16,7 @@ If you don't see a **Register a device** button, choose **Devices** from the mai
 1. On the **Choose a hardware version** dialog box, choose **HW v1\.1** for your AWS DeepLens 2019 Edition device\. **Start** to begin the registration\.   
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/register-deeplens-choosing-v1.1.png)
 
-1. On the **Connect your device to your computer** page, follow the instructions to power on your device and then connect the device to your computer by plugging one end of the USB\-to\-USB cable to a USB port into your computer and the other end into the device's **REGISTRATION** USB port on the back of the device\.   
+1. On the **Connect your device to your computer** page, follow the instructions to power on your device and then connect the device to your computer by plugging one end of the USB\-to\-USB cable to a USB port into your computer and the other end into the device's **REGISTRATION** USB port on the back of the device\. Then, choose **Next**\.  
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/connect-v1.1-device-to-computer.png)
 
 1. Wait for the connection to complete when the **Device USB connection** status becomes **Connected** and then choose **Next**\.  

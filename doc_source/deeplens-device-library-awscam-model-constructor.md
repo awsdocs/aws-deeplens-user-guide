@@ -18,7 +18,7 @@ model = awscam.Model(model_topology_file, loading_config, runtime=0)
 + `loading_config` \(dict\)—Required\. Specifies whether the model should be loaded into the GPU or CPU\. The format of this parameter is a dictionary\.
 
 **Valid values:**
-  + `{"GPU":1}`—Loads the model into the GPU\. To run inference in the Neo runtime \(`runtime=1`\), you must select GPU \(`{'GUP':1}`\)\.
+  + `{"GPU":1}`—Loads the model into the GPU\. To run inference in the Neo runtime \(`runtime=1`\), you must select GPU \(`{'GPU':1}`\)\.
   + `{"GPU":0}`—Loads the model into the CPU\.
 +  `runtime` int—Optional\. Specifies the runtime to run inference in\. 
 
