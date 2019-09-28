@@ -22,8 +22,8 @@ The project uses the [Single Shot MultiBox Detector \(SSD\)](http://gluon.mxnet.
  When deploying an Amazon SageMaker\-trained SSD model, you must first run `deploy.py` \(available from [https://github\.com/apache/incubator\-mxnet/tree/master/example/ssd/](https://github.com/apache/incubator-mxnet/tree/master/example/ssd/)\) to convert the model artifact into a deployable mode\. After cloning or downloading [the MXNet repository](https://github.com/apache/incubator-mxnet), run the `git reset --hard 73d88974f8bca1e68441606fb0787a2cd17eb364` command before calling `deploy.py` to convert the model, if the latest version does not work\.
 
 The model is able to recognize the following objects: airplane, bicycle, bird, boat, bottle, bus, car, cat, chair, cow, dining table, dog, horse, motorbike, person, potted plant, sheep, sofa, train, and TV monitor\.
-+ **Project model:** deeplens\-object\-dectection
-+ **Project function:** deeplens\-object\-dectection
++ **Project model:** deeplens\-object\-detection
++ **Project function:** deeplens\-object\-detection
 
 ## Face Detection and Recognition<a name="face-detection-recognition"></a>
 
