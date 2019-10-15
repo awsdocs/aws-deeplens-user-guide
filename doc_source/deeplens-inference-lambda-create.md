@@ -1,10 +1,10 @@
 # Create and Publish an AWS DeepLens Inference Lambda Function<a name="deeplens-inference-lambda-create"></a>
 
-Besides importing your custom model, you must create and publish an inference Lambda function to make inference of image frames from the video streams captured by your AWS DeepLens device, unless an existing and published Lambda function meet your application requirements\. 
+Besides importing your custom model, you must create and publish an inference Lambda function to make inference of image frames from the video streams captured by your AWS DeepLens device, unless an existing and published Lambda function meets your application requirements\. 
 
-Because the AWS DeepLens device is an [AWS IoT Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is run on the device in a Lambda runtime as part of the AWS IoT Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
+Because the AWS DeepLens device is an [AWS IoT Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is executed on the device in a Lambda runtime as part of the AWS IoT Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
 
-To have all the essential AWS IoT Greengrass dependencies included automatically, you can use the Lambda function blueprint of `greengrass-hello-world` as a starting point to create the AWS DeepLens inference function\. 
+To have all the essential AWS IoT Greengrass dependencies included automatically, you can use AWS IoT Greengrass Core SDK in the Lambda function for AWS DeepLens inferences\. 
 
 The engine for AWS DeepLens inference is the [`awscam` module](deeplens-library-awscam-module.md) of the [AWS DeepLens device library](deeplens-device-library.md)\. Models trained in a supported framework must be optimized to run on your AWS DeepLens device\. Unless your model is already optimized, you must use the model optimization module \([`mo`](deeplens-model-optimizer-api.md)\) of the device library to convert framework\-specific model artifacts to the AWS DeepLens\-compliant model artifacts that are optimized for the device hardware\. 
 
@@ -12,62 +12,82 @@ In this topic, you learn how to create an inference Lambda function that perform
 
 **To create and publish an inference Lambda function for your AWS DeepLens project**
 
+1. Download the [AWS DeepLens inference function template](samples/deeplens_inference_function_template.zip) to your computer\. Don't unzip the downloaded file\.
+
+   The zip file contains a skeletal inference function in Python \(`deeplens_inference.py`\) and a folder \(`greengrasssdk`\) containing the AWS IoT Greengrass Core SDK for AWS DeepLens\.
+
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. Choose **Create function**, then choose **Blueprints**\.
-
-1. Choose the **Blueprints** box then from the dropdown, choose **Blueprint name** and type **greengrass\-hello\-world**\.
-
-1. When the *greengrass\-hello\-world* blueprint appears, choose it, then choose **Configure**\.
+1. Choose **Create function**, then choose **Author from Scratch**\.
 
 1. In the **Basic information** section:
 
-   1. Type a name for your Lambda function, for example, `deeplens-my-object-inferer`\. The function name must start with `deeplens`\.
+   1. Under **Function name**, type a name for your Lambda function, for example, `deeplens-cat-or-dog-inferer`\. 
 
-   1. From the **Role** list, choose **Choose an existing role**\.
+      The function name must start with `deeplens`\.
 
-   1. Choose **AWSDeepLensLambdaRole**, which you created when you registered your device\.
+   1. Under **Runtime**, choose **Python 2\.7**\.
+
+   1. Under **Permissions**, expand **Choose or create an execution role**, if it's not already expanded\.
+
+   1. Under **Execution role**, choose **Use an existing role**\.
+
+   1. From the **Existing role** dropdown list, choose **service\-role/AWSDeepLensLambdaRole**, which was created when you registered your device\.
 
 1. Scroll to the bottom of the page and choose **Create function**\.
 
-1. In the function code box, make sure that the handler is `greengrassHelloWorld.function_handler`\. The name of the function handler must match the name of the Python script that you want to run\. In this case, you are running the `greengrassHelloWorld.py` script, so the name of the function handler is `greengrassHelloWorld.function_handler`\.
+1. In the **Function code** section, do the following: 
 
-1. Delete all of the code in the `greengrassHelloWorld.py` box and replace it with the code that you generate in the rest of this procedure\.
+   1. Under **Code entry type**, choose **Upload a \.zip file**\. 
 
-   Here, we use the Cat and Dog Detection project function as an example\.
+   1. Under **Runtime**, choose **Python 2\.7**\.
 
-1. Follow the steps below to add code for your Lambda function to the code editor for the `greengrassHelloWorld.py` file\.
+   1. Under **Handler**, replace the value by **deeplens\_inference\.lambda\_handler**\.
+**Note**  
+In the downloaded DeepLens inference function template, the Lambda function file name is *deeplens\_inference\.py* and the Lambda function handler name is `lambda_handler`\. The **Handler** value must match the Lambda function name and the Lambda function handler name, separated by a period \(`.`\)\. If you change the function name and the handler name, you must update this **Handler** value to match the changes\.
 
-   1. Import dependent modules:
+   1. Under **Function package**, choose **Upload** and then choose the downloaded *deeplens\_inference\_function\_template\.zip* file to open\.
 
-      ```
-      from threading import Thread, Event
-      import os
-      import json
-      import numpy as np
-      import awscam
-      import cv2
-      import greengrasssdk
-      ```
+      If you've modified the zip file name, choose that file, instead\.
 
-      ```
-      from threading import Thread, Event
-      import os
-      import json
-      import numpy as np
-      import awscam
-      import cv2
-      import greengrasssdk
-      ```
+1. Choose **Save** \(on the upper\-right corner of the Lambda console\) to load the skeletal Lambda function into the code editor\.
 
-      where,
-      + The `os` module allows your Lambda function to access the AWS DeepLens device operating system\.
-      + The `json` module lets your Lambda function work with JSON data\.
-      + The `awscam` module allows your Lambda function to use the [AWS DeepLens device library](deeplens-device-library.md)\. For more information, see [Model Object](deeplens-device-library-awscam-model.md)\.
-      + The `mo` module allows your Lambda function to access the AWS DeepLens model optimizer\. For more information, see [Model Optimization \(mo\) Module](deeplens-model-optimizer-api.md)\.
-      + The `cv2` module lets your Lambda function access the [Open CV](https://pypi.org/project/opencv-python/) library used for image preprocessing, including local display of frames from video feeds originating from the device\.
-      + The `greengrasssdk` module exposes the AWS IoT Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
-      + The `threading` module allows your Lambda function to access Python's multi\-threading library\.
+   If the **Handler** value doesn't match the function name or the Lambda handler name, the inference function code may not load\. In this case, choose the function from the code navigation pane, delete the empty code tab, update the **Handler** value, and then choose **Save**\.
+
+1. In the code editor, review the existing code of the template\. The first part is to import dependent modules:
+
+   ```
+   from threading import Thread, Event
+   import os
+   import json
+   import numpy as np
+   import awscam
+   import cv2
+   import greengrasssdk
+   ```
+
+   Let's examine this block line by line\. 
+   + The `os` module allows your Lambda function to access the AWS DeepLens device operating system\.
+   + The `json` module lets your Lambda function work with JSON data\.
+   + The `awscam` module allows your Lambda function to use the [AWS DeepLens device library](deeplens-device-library.md)\. For more information, see [Model Object](deeplens-device-library-awscam-model.md)\.
+   + The `mo` module allows your Lambda function to access the AWS DeepLens model optimizer\. For more information, see [Model Optimization \(mo\) Module](deeplens-model-optimizer-api.md)\.
+   + The `cv2` module lets your Lambda function access the [Open CV](https://pypi.org/project/opencv-python/) library used for image preprocessing, including local display of frames from video feeds originating from the device\.
+   + The `greengrasssdk` module exposes the AWS IoT Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
+   + The `threading` module allows your Lambda function to access Python's multi\-threading library\.
+
+   The other part is to define an Lambda handler\. The **Handler** value must match the function name and this handler name\.
+
+   ```
+   def lambda_handler(event, context):
+                   return
+   ```
+
+   For inference running on the AWS DeepLens device, the Lambda handler must be empty\.
+
+1. Next, you'll add project\-specific logic in the code editor\.
+**Note**  
+As an illustration, the steps walk you through how to customize your AWS DeepLens inference function for cat and dog recognition\.  
+If you're already familiar with the steps below, you can skip them and copy [the complete cat and dog inference function example](#deeplens-inference-lambda-complete) and paste it into the code editor to replace whatever shown there\.
 
    1.  Append the following Python code as a helper class for local display of the inference results:
 
@@ -150,7 +170,7 @@ In this topic, you learn how to create an inference Lambda function that perform
 
       ```
       def infinite_infer_run():
-          """ Entry point of the lambda function"""
+          """ Run the DeepLens inference loop frame by frame"""
           try:
               # This cat-dog model is implemented as binary classifier, since the number
               # of labels is small, create a dictionary that converts the machine
@@ -293,6 +313,10 @@ import awscam
 import cv2
 import greengrasssdk
 
+def lambda_handler(event, context):
+    """Empty entry point to the Lambda function invoked from the edge."""
+    return
+
 class LocalDisplay(Thread):
     """ Class for facilitating the local display of inference results
         (as images). The class is designed to run on its own thread. In
@@ -353,7 +377,7 @@ class LocalDisplay(Thread):
         self.stop_request.set()
 
 def infinite_infer_run():
-    """ Entry point of the lambda function"""
+    """ Run the DeepLens inference loop frame by frame"""
     try:
         # This cat-dog model is implemented as binary classifier, since the number
         # of labels is small, create a dictionary that converts the machine
