@@ -1,7 +1,7 @@
 # AWS DeepLens Developer Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -26,12 +26,12 @@ Amazon's trademarks and trade dress may not be used in
       + [Create an IAM User](deeplens-create-iam-user.md)
       + [Set Up Required Permissions](deeplens-required-iam-roles.md)
    + [Register Your AWS DeepLens Device](deeplens-getting-started-register.md)
-      + [Register AWS DeepLens 2019 Edition Device](deeplens-register-device-v1.1.md)
-         + [Connect Your AWS DeepLens 2019 Edition Device to Your Computer](deeplens-start-registering-device-using-console-v1_1.md)
-         + [Validate Your AWS DeepLens 2019 Edition Device Serial Number](how-to-validate-deeplens-v1.1-device.md)
-         + [Connect Your AWS DeepLens 2019 Edition Device to the Internet](how-to-set-up-v1.1-device-connection-to-internet.md)
-         + [Name Your AWS DeepLens 2019 Edition Device and Complete the Registration](how-to-configure-deeplens-v1.1-device.md)
-         + [View or Update Your AWS DeepLens 2019 Edition Device Settings](deeplens-v11-device-view-or-edit-settings.md)
+      + [Register AWS DeepLens version 1.1 Device](deeplens-register-device-v1.1.md)
+         + [Connect Your AWS DeepLens version 1.1 Device to Your Computer](deeplens-start-registering-device-using-console-v1_1.md)
+         + [Validate Your AWS DeepLens version 1.1 Device Serial Number](how-to-validate-deeplens-v1.1-device.md)
+         + [Connect Your AWS DeepLens version 1.1 Device to the Internet](how-to-set-up-v1.1-device-connection-to-internet.md)
+         + [Name Your AWS DeepLens version 1.1 Device and Complete the Registration](how-to-configure-deeplens-v1.1-device.md)
+         + [View or Update Your AWS DeepLens version 1.1 Device Settings](deeplens-v11-device-view-or-edit-settings.md)
       + [Register Your AWS DeepLens Device](deeplens-register-device-v1.md)
          + [Configure Your AWS Account for AWS DeepLens Device](deeplens-start-registering-device-using-console.md)
          + [Connect to Your AWS DeepLens Device's Wi-Fi Network](deeplens-getting-started-connect.md)
@@ -52,7 +52,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Supported Caffe Models](deeplens-supported-frameworks-caffe-models.md)
          + [Supporting Caffe Layers](deeplens-supported-frameworks-caffe-layers.md)
    + [Viewing AWS DeepLens Output Streams](deeplens-viewing-output.md)
-      + [View Video Streams from AWS DeepLens 2019 Edition Device in Browser](deeplens-viewing-video-streams-from-v1.1-device-in-browser.md)
+      + [View Video Streams from AWS DeepLens version 1.1 Device in Browser](deeplens-viewing-video-streams-from-v1.1-device-in-browser.md)
       + [View Video Streams from AWS DeepLens Device in Browser](deeplens-viewing-device-output-in-browser.md)
       + [View Video Streams on Your AWS DeepLens Device](deeplens-viewing-device-output-on-device.md)
       + [Creating a Lambda Function for Viewing the Project Stream](deeplens-viewing-output-custom-lambda.md)
@@ -82,6 +82,9 @@ Amazon's trademarks and trade dress may not be used in
    + [Deregistering Your AWS DeepLens Device](deeplens-deregister-device.md)
    + [Deleting AWS DeepLens Resources](deeplens-delete-resources.md)
       + [Delete AWS DeepLens Resources Using the AWS Console](deeplens-delete-resources-using-console.md)
+   + [Restoring Your AWS DeepLens Device to Factory Settings](deeplens-troubleshooting-factory-reset.md)
+      + [Preparing for the Factory Reset of Your AWS DeepLens Device](deeplens-device-factory-reset-preparation.md)
+      + [Restoring Your AWS DeepLens Device to Factory Settings](deeplens-device-factory-reset-instructions.md)
 + [Logging and Troubleshooting Your AWS DeepLens Project](deeplens-logging-and-troubleshooting.md)
    + [AWS DeepLens Project Logs](deeplens-logging.md)
    + [Troubleshooting AWS DeepLens](troubleshooting-guide.md)

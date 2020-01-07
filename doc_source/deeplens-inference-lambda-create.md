@@ -1,20 +1,20 @@
 # Create and Publish an AWS DeepLens Inference Lambda Function<a name="deeplens-inference-lambda-create"></a>
 
-Besides importing your custom model, you must create and publish an inference Lambda function to make inference of image frames from the video streams captured by your AWS DeepLens device, unless an existing and published Lambda function meets your application requirements\. 
+This topic explains how to add an AWS Lambda inference function to your custom AWS DeepLens project\. The Lambda function helps you make an inference from frames in a video stream that is captured by your AWS DeepLens device\.  If an existing and published Lambda function meets your application requirements, you can use it instead\. 
 
-Because the AWS DeepLens device is an [AWS IoT Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device, the inference function is executed on the device in a Lambda runtime as part of the AWS IoT Greengrass core software deployed to your AWS DeepLens device\. As such, you create the AWS DeepLens inference function as an AWS Lambda function\. 
+The AWS DeepLens device is an [AWS IoT Greengrass core](http://docs.aws.amazon.com/greengrass/latest/developerguide/gg-core.html) device\. The inference function is executed on the AWS DeepLens device in a Lambda runtime as part of the AWS IoT Greengrass core software\. This software is included in the AWS DeepLens software package  installed on your AWS DeepLens device\. When you create the AWS DeepLens inference function, it's an AWS Lambda function\. 
 
-To have all the essential AWS IoT Greengrass dependencies included automatically, you can use AWS IoT Greengrass Core SDK in the Lambda function for AWS DeepLens inferences\. 
+To have all the essential AWS IoT Greengrass dependencies included automatically, use AWS IoT Greengrass Core SDK in the Lambda function\. 
 
-The engine for AWS DeepLens inference is the [`awscam` module](deeplens-library-awscam-module.md) of the [AWS DeepLens device library](deeplens-device-library.md)\. Models trained in a supported framework must be optimized to run on your AWS DeepLens device\. Unless your model is already optimized, you must use the model optimization module \([`mo`](deeplens-model-optimizer-api.md)\) of the device library to convert framework\-specific model artifacts to the AWS DeepLens\-compliant model artifacts that are optimized for the device hardware\. 
+The AWS DeepLens inference engine is the [`awscam` module](deeplens-library-awscam-module.md) of the [AWS DeepLens device library](deeplens-device-library.md)\. Models that are trained in a supported framework must be optimized to run on your AWS DeepLens device\. Unless your model is already optimized, use the model optimization module \([`mo`](deeplens-model-optimizer-api.md)\) of the device library\. This converts framework\-specific model artifacts to AWS DeepLens\-compliant model artifacts\. 
 
-In this topic, you learn how to create an inference Lambda function that performs three key functions: preprocessing, inference, and post processing\. For the complete function code, see [The Complete Inference Lambda Function](#deeplens-inference-lambda-complete)\.
+In this topic, you learn how to create an inference Lambda function that performs three key functions: Preprocessing, inference, and post processing\. For the complete function code, see [The Complete Inference Lambda Function](#deeplens-inference-lambda-complete)\.
 
 **To create and publish an inference Lambda function for your AWS DeepLens project**
 
 1. Download the [AWS DeepLens inference function template](samples/deeplens_inference_function_template.zip) to your computer\. Don't unzip the downloaded file\.
 
-   The zip file contains a skeletal inference function in Python \(`deeplens_inference.py`\) and a folder \(`greengrasssdk`\) containing the AWS IoT Greengrass Core SDK for AWS DeepLens\.
+   The zip file contains a basic inference function in Python \(`deeplens_inference.py`\) and a folder \(`greengrasssdk`\) containing the AWS IoT Greengrass Core SDK for AWS DeepLens\.
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
@@ -44,15 +44,15 @@ In this topic, you learn how to create an inference Lambda function that perform
 
    1. Under **Handler**, replace the value by **deeplens\_inference\.lambda\_handler**\.
 **Note**  
-In the downloaded DeepLens inference function template, the Lambda function file name is *deeplens\_inference\.py* and the Lambda function handler name is `lambda_handler`\. The **Handler** value must match the Lambda function name and the Lambda function handler name, separated by a period \(`.`\)\. If you change the function name and the handler name, you must update this **Handler** value to match the changes\.
+In the downloaded AWS DeepLens inference function template, the Lambda function file name is *deeplens\_inference\.py* and the Lambda function handler name is `lambda_handler`\. The **Handler** value must match the Lambda function name and the Lambda function handler name, separated by a period\. If you change the function name and the handler name, you must update this **Handler** value to match the changes\.
 
    1. Under **Function package**, choose **Upload** and then choose the downloaded *deeplens\_inference\_function\_template\.zip* file to open\.
 
-      If you've modified the zip file name, choose that file, instead\.
+      If you've modified the zip file name, choose that file instead\.
 
-1. Choose **Save** \(on the upper\-right corner of the Lambda console\) to load the skeletal Lambda function into the code editor\.
+1. Choose **Save** \(on the upper\-right corner of the Lambda console\) to load the basic Lambda function into the code editor\.
 
-   If the **Handler** value doesn't match the function name or the Lambda handler name, the inference function code may not load\. In this case, choose the function from the code navigation pane, delete the empty code tab, update the **Handler** value, and then choose **Save**\.
+   If the **Handler** value doesn't match the function name or the Lambda handler name, the inference function code might not load\. In this case, choose the function from the code navigation pane, delete the empty code tab, update the **Handler** value, and then choose **Save**\.
 
 1. In the code editor, review the existing code of the template\. The first part is to import dependent modules:
 
@@ -75,7 +75,7 @@ In the downloaded DeepLens inference function template, the Lambda function file
    + The `greengrasssdk` module exposes the AWS IoT Greengrass API for the Lambda function to send messages to the AWS Cloud, including sending operational status and inference results to AWS IoT\.
    + The `threading` module allows your Lambda function to access Python's multi\-threading library\.
 
-   The other part is to define an Lambda handler\. The **Handler** value must match the function name and this handler name\.
+   The other part is to define a Lambda handler\. The **Handler** value must match the function name and this handler name\.
 
    ```
    def lambda_handler(event, context):
@@ -84,7 +84,7 @@ In the downloaded DeepLens inference function template, the Lambda function file
 
    For inference running on the AWS DeepLens device, the Lambda handler must be empty\.
 
-1. Next, you'll add project\-specific logic in the code editor\.
+1. Next, add project\-specific logic in the code editor\.
 **Note**  
 As an illustration, the steps walk you through how to customize your AWS DeepLens inference function for cat and dog recognition\.  
 If you're already familiar with the steps below, you can skip them and copy [the complete cat and dog inference function example](#deeplens-inference-lambda-complete) and paste it into the code editor to replace whatever shown there\.
@@ -156,7 +156,7 @@ If you're already familiar with the steps below, you can skip them and copy [the
 
       1.  Exposes a constructor \(`__init__(self, resolution)`\) to initiate the `LocalDisplay` class with the specified image size \(`resolution`\)\.
 
-      1. Overrides the `run` method, which will be invoked by the `Thread.start` method, to support continuous writing images to the specified file \(`result_path`\) on the device\. The Lambda function can write to files only in the `/tmp` directory\. To view the images in this file \(`/tmp/results.mjpeg`\), start `mplayer` on a device terminal window as follows:
+      1. Overrides the `run` method, which is invoked by the `Thread.start` method, to support continuous writing images to the specified file \(`result_path`\) on the device\. The Lambda function can write to files only in the `/tmp` directory\. To view the images in this file \(`/tmp/results.mjpeg`\), start `mplayer` on a device terminal window as follows:
 
          ```
          mplayer -demuxer lavf -lavfdopts format=mjpeg:probesize=32 /tmp/results.mjpeg
@@ -166,7 +166,7 @@ If you're already familiar with the steps below, you can skip them and copy [the
 
       1. Exposes the `join` method to turn waiting threads active by setting the [https://docs.python.org/2.0/lib/event-objects.html](https://docs.python.org/2.0/lib/event-objects.html) object's internal flag to true\.
 
-   1.  Append to the code editor the following Python code that initializes looping through the inference logic, frame by frame:
+   1.  Append to the code editor the following Python code, which initializes looping through the inference logic, frame by frame:
 
       ```
       def infinite_infer_run():
@@ -215,7 +215,7 @@ If you're already familiar with the steps below, you can skip them and copy [the
 
       The inference initialization proceeds as follows: 
 
-      1. Specifies the model type \(`model_type`\), model artifact path \(`model_path`\) to load the model artifact \([`awscam.Model`](deeplens-device-library-awscam-model-constructor.md)\), specifying whether the model is loaded into the device's GPU \(`{'GPU':1}`\) or CPU \(`{'CPU':0}`\)\. We don't recommend using the CPU because it is much less efficient\. The model artifacts are deployed to the device in the `/opt/awscam/artifacts` directory\. For the artifact optimized for DeepLens, it consists of an `.xml` file located in this directory\. For the artifact not yet optimized for DeepLens, it consists of a JSON file and a another file with the `.params` extension located in the same directory\. For optimized model artifact file path, set the `model_path` variable to a string literal: 
+      1. Specifies the model type \(`model_type`\), model artifact path \(`model_path`\) to load the model artifact \([`awscam.Model`](deeplens-device-library-awscam-model-constructor.md)\), specifying whether the model is loaded into the device's GPU \(`{'GPU':1}`\) or CPU \(`{'CPU':0}`\)\. We don't recommend using the CPU because it is much less efficient\. The model artifacts are deployed to the device in the `/opt/awscam/artifacts` directory\. For the artifact optimized for AWS DeepLens, it consists of an `.xml` file located in this directory\. For the artifact not yet optimized for AWS DeepLens, it consists of a JSON file and another file with the `.params` extension located in the same directory\. For optimized model artifact file path, set the `model_path` variable to a string literal: 
 
          ```
          model_path = "/opt/awscam/artifacts/<model-name>.xml"
@@ -233,11 +233,11 @@ If you're already familiar with the steps below, you can skip them and copy [the
 
       1. Specifies `input_width` and `input_height` as the width and height in pixels of images used in training\. To ensure meaningful inference, you must convert input image for inference to the same size\. 
 
-      1. Specifies as part of initialization the model type \([`model_type`](deeplens-device-library-awscam-model-parseresult.md)\) and declares the output map \(`output_map`\)\. In this example, the model type is `classification`\. Other model types are `ssd` \(single shot detector\) and `segmentation`\. The output map will be used to map an inference result label from a numerical value to a human readable text\. For binary classifications, there are only two labels \(`0` and `1`\)\. 
+      1. Specifies as part of initialization the model type \([`model_type`](deeplens-device-library-awscam-model-parseresult.md)\) and declares the output map \(`output_map`\)\. In this example, the model type is `classification`\. Other model types are `ssd` \(single shot detector\) and `segmentation`\. The output map is used to map an inference result label from a numerical value to a human readable text\. For binary classifications, there are only two labels \(`0` and `1`\)\. 
 
-         The `num_top_k ` variable refers to the number of inference result of the highest probability\. The value can range from 1 to the maximum number of classifiers\. For binary classification, it can be `1` or `2`\.
+         The `num_top_k ` variable refers to the number of inference results of the highest probability\. The value can range from 1 to the maximum number of classifiers\. For binary classification, it can be `1` or `2`\.
 
-      1. Instantiates an AWS IoT Greengrass SDK \(`greengrasssdk`\) to make the inference output available to the AWS Cloud, including sending process info and processed result to an AWS IoT topic \(`iot_topic`\) that provides another means to view your AWS DeepLens project output, although as JSON data, instead of a video stream\.
+      1. Instantiates an AWS IoT Greengrass SDK \(`greengrasssdk`\) to make the inference output available to the AWS Cloud\. This includes sending process info and processed results to an AWS IoT topic \(`iot_topic`\)The topic provides another means to view your AWS DeepLens project output, although as JSON data, instead of a video stream\.
 
       1. Starts a thread \(`local_display.start`\) to feed parsed video frames for local display \(`LocalDisplay`\), [on device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) or [using a web browser](deeplens-viewing-device-output-in-browser.md)\.
 
@@ -275,9 +275,9 @@ If you're already familiar with the steps below, you can skip them and copy [the
 
       The frame\-by\-frame inference logic flows as follows: 
 
-      1.  Captures a frame from the DeepLens device video feed \([`awscam.getLastFrame()`](deeplens-device-library-awscam-model-get-last-frame.md)\)\. 
+      1.  Captures a frame from the AWS DeepLens device video feed \([`awscam.getLastFrame()`](deeplens-device-library-awscam-model-get-last-frame.md)\)\. 
 
-      1. Processes the captured input frame \(`cv2.resize(frame, (input_height, input_width))`\) to ensure that its dimensions match the dimensions of the frame that the model was trained on\. Depending on the model training, you might need to perform other preprocessing steps, such as image normalization\.
+      1. Processes the captured input frame \(`cv2.resize(frame, (input_height, input_width))`\) to ensure that its dimensions match the dimensions of the frame that the model was trained on\. Depending on the model training, you might want to perform other preprocessing steps, such as image normalization\.
 
       1. Performs inference on the frame based on the specified model: `result = model.doInference(frame_resize)`\.
 
@@ -295,7 +295,7 @@ For questions or help, see the AWS DeepLens forum at [Forum: AWS DeepLens](https
 
 ## The Complete Inference Lambda Function<a name="deeplens-inference-lambda-complete"></a>
 
-The following code shows the complete Lambda function that, when deployed to the AWS DeepLens device, infers video frames captured from the device to be a cat or dog, based on the model serialized in the model file of `mxnet_resnet18-catsvsdogs_FP32_FUSED.xml` under the `/opt/awscam/artifacts/` directory\. 
+The following code shows a complete Lambda function\. When deployed to the AWS DeepLens device, the function infers video frames captured from the device to be a cat or dog\. The function is based on the model serialized in the model file `mxnet_resnet18-catsvsdogs_FP32_FUSED.xml` under the `/opt/awscam/artifacts/` directory\. 
 
 ```
 #*****************************************************

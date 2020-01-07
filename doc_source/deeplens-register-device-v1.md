@@ -1,6 +1,6 @@
 # Register Your AWS DeepLens Device<a name="deeplens-register-device-v1"></a>
 
-The instructions presented thereafter apply to the original \(also known as v1\) AWS DeepLens device\. You can find out the hardware version at the bottom of your AWS DeepLens device\. If you don't see **HW v1\.1** printed there, your device is of the original AWS DeepLens edition\. You can then proceed as instructed as follows\. Otherwise, see [Register AWS DeepLens 2019 Edition Device](deeplens-register-device-v1.1.md)\.
+The instructions presented thereafter apply to the original \(also known as v1\) AWS DeepLens device\. You can find out the hardware version at the bottom of your AWS DeepLens device\. If you don't see **HW v1\.1** printed there, your device is of the original AWS DeepLens edition\. You can then proceed as instructed as follows\. Otherwise, see [Register AWS DeepLens version 1\.1 Device](deeplens-register-device-v1.1.md)\.
 
 The registration process involves performing the following tasks\. Some of the tasks are carried out on the AWS Cloud and others are on the AWS DeepLens device\.
 + Name your device so that you can identify it within the AWS DeepLens service\. 

@@ -14,7 +14,7 @@ Follow the steps below to create and deploy the Object Detection sample project\
 
 **To create and deploy an AWS DeepLens sample project using the AWS DeepLens console**
 
-1. Open the AWS DeepLens console by navigating to [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/) from a web browser\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Projects**, then choose **Create new project**\.
 

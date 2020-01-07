@@ -4,7 +4,7 @@ Use the following guidelines to troubleshoot issues with AWS DeepLens device reg
 
 **Topics**
 + [Why Does My Attempt to Use the AWS DeepLens Console to Register a Device Go into an Apparently Endless Loop and Fail to Complete?](#troubleshooting-device-registration-v1.1-device-no-windows7-ie11)
-+ [How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?](#troubleshooting-undetected-v1.1-device)
++ [How to Ensure My AWS DeepLens version 1\.1 Device Is Detectable During Registration?](#troubleshooting-undetected-v1.1-device)
 + [How to Turn your Device Back to its Setup Mode to Complete Device Registration or Update Device Settings?](#troubleshooting-device-registration-1)
 + [How to Connect Your Device to Your Home or Office Wi\-Fi Network When the Wi\-Fi SSID or Password Contains Special Characters?](#troubleshooting-device-wifi-connection)
 + [What IAM Roles to Choose When None Is Available?](#troubleshooting-device-registration-2)
@@ -25,9 +25,9 @@ Use the following guidelines to troubleshoot issues with AWS DeepLens device reg
 **Unsupported Browser for the AWS DeepLens Console**
 +  Internet Explorer 11 on Windows 7 
 
-## How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?<a name="troubleshooting-undetected-v1.1-device"></a>
+## How to Ensure My AWS DeepLens version 1\.1 Device Is Detectable During Registration?<a name="troubleshooting-undetected-v1.1-device"></a>
 
- When registering your AWS DeepLens 2019 Edition device, your computer may not detect the device after you've connected your device to your computer with a USB cable\. This would prevent your from completing the registration\. 
+ When registering your AWS DeepLens version 1\.1 device, your computer may not detect the device after you've connected your device to your computer with a USB cable\. This would prevent your from completing the registration\. 
 
  To ensure that your device can be detected, make sure the following conditions are met: 
 + Your device is powered on\.

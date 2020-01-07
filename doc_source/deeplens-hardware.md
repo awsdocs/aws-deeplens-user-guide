@@ -15,7 +15,7 @@ The following image shows the front and back of the AWS DeepLens hardware\.
 
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-device-view-front-back.png)
 
-The following image shows the front and back of the AWS DeepLens 2019 Edition hardware\.
+The following image shows the front and back of the AWS DeepLens version 1\.1 hardware\.
 
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens_2019_edition_device_specs.png)
 
@@ -30,7 +30,7 @@ On the back of the device, you have access to the following:
 
 1. A micro HDMI slot for connecting a display monitor to the device using a micro\-HDMI\-to\-HDMI cable\.
 
-1. Two USB 2\.0 \(AWS DeepLens Edition\)/3\.0 \(AWS DeepLens 2019 Edition\) slots for connecting USB mouse and keyboard, or any other USB\-enabled accessories, to the device\.
+1. Two USB 2\.0 \(AWS DeepLens Edition\)/3\.0 \(AWS DeepLens version 1\.1\) slots for connecting USB mouse and keyboard, or any other USB\-enabled accessories, to the device\.
 
 1. A reset pinhole for turning the device into the setup mode that allows you to make the device as an access point and to connect your laptop to the device to configure the device\.
 

@@ -7,3 +7,4 @@ The following topics explain how to manage your AWS DeepLens device and access d
 + [Update Your AWS DeepLens Device](deeplens-manual-updates.md)
 + [Deregistering Your AWS DeepLens Device](deeplens-deregister-device.md)
 + [Deleting AWS DeepLens Resources](deeplens-delete-resources.md)
++ [Restoring Your AWS DeepLens Device to Factory Settings](deeplens-troubleshooting-factory-reset.md)

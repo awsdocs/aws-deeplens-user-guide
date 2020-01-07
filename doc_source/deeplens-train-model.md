@@ -143,7 +143,7 @@ Now that you have a trained mxNet model there is one final step that is required
 
 Import the edited model into AWS DeepLens\.
 
-1. Open the AWS DeepLens console by navigating to [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/) from a web browser\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Models**, then choose **Import model**\.
 
@@ -167,7 +167,7 @@ Use the AWS Lambda console to create a Lambda function that uses your model\. Fo
 
 Now create a new AWS DeepLens project and add the edited model to it\.
 
-1. Open the AWS DeepLens console by navigating to [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/) from a web browser\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Projects**\.
 
@@ -187,7 +187,7 @@ Now create a new AWS DeepLens project and add the edited model to it\.
 
 ## Step 8: Review and Deploy the Project<a name="deploy-project"></a>
 
-1. Open the AWS DeepLens console by navigating to [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/) from a web browser\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. From the list of projects, choose the project that you just created, then choose **Deploy to device**\.
 
