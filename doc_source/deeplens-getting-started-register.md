@@ -11,5 +11,5 @@ The registration process is different for each version of the AWS DeepLens hardw
 and then follow the version\-specific instructions provided below\. 
 
 **Topics**
-+ [Register AWS DeepLens version 1\.1 Device](deeplens-register-device-v1.1.md)
++ [Register AWS DeepLens 2019 Edition Device](deeplens-register-device-v1.1.md)
 + [Register Your AWS DeepLens Device](deeplens-register-device-v1.md)

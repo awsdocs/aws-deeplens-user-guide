@@ -8,7 +8,7 @@ Resetting your AWS DeepLens completely wipes the data on the device and returns 
 
 Before you get started, make sure you have the following items ready:
 + 1 USB flash drive, 16GB or larger
-+ A DeepLens v1\.0 or DeepLens v1\.1 device \(to verify your hardware version, see the following image\)
++ A DeepLens \(v1\.0\) or DeepLens 2019 Edition \(v1\.1\) device \(to verify your hardware version, see the following image\)
 + A computer to facilitate preparation: 
   + Set up your AWS DeepLens box as a Linux computer with  a mouse, keyboard, monitor, HDMI to mini USB cable, and a USB hub **OR**
   + Connect AWS DeepLens to a personal computer 

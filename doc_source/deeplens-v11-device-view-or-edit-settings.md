@@ -1,8 +1,8 @@
-# View or Update Your AWS DeepLens version 1\.1 Device Settings<a name="deeplens-v11-device-view-or-edit-settings"></a>
+# View or Update Your AWS DeepLens 2019 Edition Device Settings<a name="deeplens-v11-device-view-or-edit-settings"></a>
 
 You can view or update the device settings once the device is successfully registered\.
 
-**To view or update your AWS DeepLens version 1\.1 device settings**
+**To view or update your AWS DeepLens 2019 Edition device settings**
 
 1. On the successfully registered device details page in the AWS DeepLens console, choose **Edit device settings**\.
 
@@ -25,6 +25,6 @@ You can view or update the device settings once the device is successfully regis
 **Note**  
 Be sure to use `DeepLens` for the certificate password, when prompted\.
 
-      To verify the certificate is installed properly, follow the instructions given in [View Video Streams from AWS DeepLens version 1\.1 Device in Browser](deeplens-viewing-video-streams-from-v1.1-device-in-browser.md) \.
+      To verify the certificate is installed properly, follow the instructions given in [View Video Streams from AWS DeepLens 2019 Edition Device in Browser](deeplens-viewing-video-streams-from-v1.1-device-in-browser.md) \.
 
 When done with viewing or updating the device settings, you can disconnect the device from your computer  and use AWS DeepLens\. 

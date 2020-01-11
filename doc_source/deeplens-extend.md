@@ -112,7 +112,7 @@ Configure the Lambda function by replacing the default code with custom code and
            Message: 'Your AWS DeepLens device just identified a hot dog. Congratulations!',
            PhoneNumber: phone_number
        };
-       if (event.label.includes("Hotdog")) {
+       if (event.Hotdog > 0.5) {
            SNS.publish(params, callback);
        }
    };

@@ -1,10 +1,10 @@
-# Connect Your AWS DeepLens version 1\.1 Device to the Internet<a name="how-to-set-up-v1.1-device-connection-to-internet"></a>
+# Connect Your AWS DeepLens 2019 Edition Device to the Internet<a name="how-to-set-up-v1.1-device-connection-to-internet"></a>
 
-After the device has been validated, you must get your AWS DeepLens version 1\.1 device connected to the internet\. You ca use a wireless \(Wi\-Fi\) network or a wired \(Ethernet\) network\. The latter requires that you have an Ethernet\-to\-USB adapter\. The internet connection ensures that the device receive necessary software updates during registration\. 
+After the device has been validated, you must get your AWS DeepLens 2019 Edition device connected to the internet\. You ca use a wireless \(Wi\-Fi\) network or a wired \(Ethernet\) network\. The latter requires that you have an Ethernet\-to\-USB adapter\. The internet connection ensures that the device receive necessary software updates during registration\. 
 
 Here, we demonstrate setting up the internet connection over Wi\-Fi\.
 
-**To set up the internet connection to your AWS DeepLens version 1\.1 device over Wi\-Fi**
+**To set up the internet connection to your AWS DeepLens 2019 Edition device over Wi\-Fi**
 
 1. On the **Set up your device's internet connection** page, choose **Wi\-Fi network** under **Network type**\. 
 

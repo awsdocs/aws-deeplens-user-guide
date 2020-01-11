@@ -1,8 +1,8 @@
-# Name Your AWS DeepLens version 1\.1 Device and Complete the Registration<a name="how-to-configure-deeplens-v1.1-device"></a>
+# Name Your AWS DeepLens 2019 Edition Device and Complete the Registration<a name="how-to-configure-deeplens-v1.1-device"></a>
 
-After your AWS DeepLens version 1\.1 device is connected to the internet and its software updated, name the device for future reference and agree to the AWS access permissions that are granted on your behalf in order to complete the registration\. 
+After your AWS DeepLens 2019 Edition device is connected to the internet and its software updated, name the device for future reference and agree to the AWS access permissions that are granted on your behalf in order to complete the registration\. 
 
-**To name your AWS DeepLens version 1\.1 device, agree to AWS permissions, and complete the registration**
+**To name your AWS DeepLens 2019 Edition device, agree to AWS permissions, and complete the registration**
 
 1. Under **Name your device**, give the device a name\. 
 
@@ -19,11 +19,11 @@ The device registration is now underway\. The asynchronous process involves the 
 
 To verify that the registration is successfully completed, follow the [next step](#how-to-verify-deeplens-v1.1-device-registration)\.
 
-## Verify Your AWS DeepLens version 1\.1 Device Registration<a name="how-to-verify-deeplens-v1.1-device-registration"></a>
+## Verify Your AWS DeepLens 2019 Edition Device Registration<a name="how-to-verify-deeplens-v1.1-device-registration"></a>
 
 After the registration is complete, verify the device registration is successful by checking the device's registration status\. 
 
-**To verify your AWS DeepLens version 1\.1 device registration**
+**To verify your AWS DeepLens 2019 Edition device registration**
 
 1. Wait for the device registration to complete\. Make sure the **Registration status** under **Device Status** shows **Registered**\.   
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/v1.1-device-completed-registration.png)
