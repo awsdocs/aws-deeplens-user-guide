@@ -1,12 +1,14 @@
-# Configure Your AWS Account to Use AWS DeepLens<a name="deeplens-start-registering-device-using-console"></a>
+# Configure Your AWS Account for AWS DeepLens Device<a name="deeplens-start-registering-device-using-console"></a>
 
-Follow the steps below to configure your AWS account to use AWS DeepLens\. If you recycle a device from another user, make sure that the previous user [has deregistered the device](deeplens-deregister-device.md) before registering it again\. 
+Configuring your AWS account for your AWS DeepLens device involves naming the device, grant AWS access permissions, and download a certificate for the device to be authenticated by AWS\.
 
-**To configure your AWS account for AWS DeepLens**
+**To configure your AWS account for AWS DeepLens device**
 
 1. Sign in to the AWS Management Console for AWS DeepLens at [https://console\.aws\.amazon\.com/deeplens/home?region=us\-east\-1\#firstrun](https://console.aws.amazon.com/deeplens/home?region=us-east-1#firstrun)\.
 
-1. Choose **Register device**\. If you don't see a **Register device** button, choose **Devices** on the main navigation pane\.
+1. Choose **Register a device**\. If you don't see a **Register a device** button, choose **Devices** on the main navigation pane\.
+
+1. On the **Choose a hardware version** dialog window, choose the **HW v1** radio button for your AWS DeepLens device\. Then choose **Start**\. 
 
 1. In the **Name your device** section on the **Configure your AWS account** page, type a name \(e\.g\., `My_DeepLens_1`\) for your AWS DeepLens device in the **Device name** text field \.
 

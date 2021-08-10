@@ -1,6 +1,6 @@
 # Troubleshooting the Model Optimizer<a name="deeplens-model-optimizer-api-errors"></a>
 
- In this section, you'll find a list of frequently asked questions and answers about errors reported by the model optimizer\. The AWS DeepLens model optimizer depends on the Intel Computer Vision SDK, which is installed with the AWS DeepLens  software\. For errors not covered here, see [Intel Computer Vision SDK Support](https://software.intel.com/en-us/forums/computer-vision) and ask a question on the forum\. 
+ In this section, you'll find a list of frequently asked questions and answers about errors reported by the model optimizer\. The AWS DeepLens model optimizer depends on the Intel Computer Vision SDK, which is installed with the AWS DeepLens software\. For errors not covered here, see [Intel Computer Vision SDK Support](https://software.intel.com/en-us/forums/computer-vision) and ask a question on the forum\. 
 
 **Topics**
 + [How to handle the "*Current caffe\.proto does not contain field\.*" error?](#deeplens-mo-errors-cafee_proto-missing-field)

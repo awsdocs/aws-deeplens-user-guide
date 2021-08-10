@@ -5,7 +5,7 @@ Creates an instance of the Kinesis Video Streams Producer SDK client object for 
 **Syntax**
 
 ```
-import DeepLesn_Kinesis_Video as dkv
+import DeepLens_Kinesis_Video as dkv
 producer = dkv.createProducer(aws_access_key, aws_seccrete_key, session_token, aws_region)
 ```
 
@@ -45,6 +45,6 @@ producer = dkv.createProducer(aws_access_key, aws_seccrete_key, session_token, a
 **Example**
 
 ```
-import DeepLesn_Kinesis_Video as dkv
+import DeepLens_Kinesis_Video as dkv
 producer = dkv.createProducer("ABCDEF...LMNO23PU", "abcDEFGHi...bc8defGxhiJ", "", "us-east-1")
 ```

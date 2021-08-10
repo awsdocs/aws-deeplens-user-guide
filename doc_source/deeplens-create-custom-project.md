@@ -11,7 +11,7 @@ The following procedure creates a custom AWS DeepLens project containing a custo
 
 The steps for creating a project encompass two screens\. On the first screen you select your project\. On the second screen, you specify the project's details\.
 
-1. Using your browser, open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Projects**, then choose **Create new project**\.
 

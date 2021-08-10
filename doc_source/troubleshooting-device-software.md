@@ -11,7 +11,6 @@ The following troubleshooting tips explain how to resolve issues that you might 
 + [How to Upgrade the awscam Software Package Dependencies?](#troubleshooting-device-software-awscam-dependencies)
 + [How to Install Security Updates on the Device?](#troubleshooting-device-software-security-updates)
 + [How to Handle Unsupported Architecture During a Device Update?](#troubleshooting-device-software-unsupported-architecture)
-+ [How to Reset the Device Software to the Factory Settings?](#troubleshooting-device-software-factory-settings)
 
 ## How to Determine Which Version of AWS DeepLens Software You Have?<a name="troubleshooting-device-software-version"></a>
 
@@ -158,7 +157,7 @@ The update might get delayed or fail under the following conditions:
 
   ```
   sudo apt-get update
-  sudo apt-get upgrade awscam
+  sudo apt-get install awscam
   ```
 
   Allow several minutes for the update to finish\. If AWS DeepLens reports an error during the upgrade process, see [How to Upgrade the awscam Software Package Dependencies?](#troubleshooting-device-software-awscam-dependencies)\.
@@ -243,7 +242,3 @@ If you get `unmet dependencies` error messages, follow the instruction in [How t
 ## How to Handle Unsupported Architecture During a Device Update?<a name="troubleshooting-device-software-unsupported-architecture"></a>
 
 If you run the `sudo apt-get update` command and get the `The https://awsdeepupdate.us-east-1.amazonaws.com packages repository is not set to public (access denied) causing error: "doesn't support architecture i386"` error message , you can safely ignore it\. The `awscam` package is supported only for x86\_64 architecture\.
-
-## How to Reset the Device Software to the Factory Settings?<a name="troubleshooting-device-software-factory-settings"></a>
-
-To reset your AWS DeepLens device to its factory settings, follow the [AWS DeepLens system restore instructions](https://s3.amazonaws.com/deeplens-public/factory-restore/DeepLens_System_Restore_Instruction.pdf)\. After the reset, you may need to update the device \(`awscam`\) software to the latest version\. You will be asked to update the software when registering the device using the AWS DeepLens console\. You should update the software as soon as possible after resetting the device\. 

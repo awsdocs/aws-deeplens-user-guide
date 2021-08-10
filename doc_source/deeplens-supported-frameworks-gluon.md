@@ -32,4 +32,4 @@ result = squeezenet(fake_image)
 squeezenet.export(‘squeezenet')
 ```
 
- For a complete list of models and more information, see the [Gluon Model Zoo](https://mxnet.incubator.apache.org/api/python/gluon/model_zoo.html)\. 
+ For a complete list of models and more information, see the [Gluon Model Zoo](https://gluon-cv.mxnet.io/model_zoo/index.html)\. 

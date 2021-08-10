@@ -64,6 +64,6 @@ With the project created, you're ready to deploy it to your registered AWS DeepL
 
    1. View the JSON\-formatted output published by the inference Lambda function in the AWS IoT Core console\. For instructions, see [View Your AWS DeepLens Project Output in the AWS IoT Console](deeplens-viewing-project-output-json.md)\.
 
-   1. View streaming video in a supported web browser\. For instructions, [View Your AWS DeepLens Project Output in a Browser](deeplens-viewing-device-output-in-browser.md)\.
+   1. View streaming video in a supported web browser\. For instructions, [View Video Streams from AWS DeepLens Device in Browser](deeplens-viewing-device-output-in-browser.md)\.
 
 This completes this tutorial to build and deploy your head pose detection project\. 

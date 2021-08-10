@@ -28,4 +28,4 @@ You can use the following Apache MXNet modeling layers to train deep learning mo
 |   \_mul   |  Performs multiplication  | 
 |   \_Plus   |  Performs an element\-wise sum of the input arrays with broadcasting  | 
 
- For more information about MXNet layers, see [ MXNet Gluon Neural Network Layers](https://mxnet.incubator.apache.org/api/python/gluon/nn.html)\.
+ For more information about MXNet layers, see [ MXNet Gluon Neural Network Layers](https://gluon.mxnet.io/index.html)\.

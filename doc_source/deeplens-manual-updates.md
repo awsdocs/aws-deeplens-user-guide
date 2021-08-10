@@ -2,6 +2,9 @@
 
 When you set up your device, you had the option to enable automatic updates \(see [Set Up Your AWS DeepLens Device](deeplens-getting-started-set-up.md)\)\. If you enabled automatic updates, you need only to reboot the device to get the software updated on your device\. If you didn't enable automatic updates, you need to manually update your device periodically\.
 
+**Note**  
+ If your updates gets stuck in an endless loop, try to check and turn on the **Unsupported updates** option under **Install updates from:** on the **Updates** tab in **Software & Updates**, an Ubuntu system utility on the device\. 
+
 **To manually update your AWS DeepLens on the device**
 
 1. Plug in your AWS DeepLens and turn it on\.

@@ -1,4 +1,4 @@
-# Editing an Existing Model with Amazon SageMaker<a name="deeplens-train-model"></a>
+# Use Amazon SageMaker to Provision a Pre\-trained Model for a Sample Project<a name="deeplens-train-model"></a>
 
 In this example, you start with a SqueezeNet object detection model and use Amazon SageMaker to train it to perform binary classification to determine whether an object is a hot dog\. The example shows you how to edit a model to perform binary classification, and explains learning rate and epochs\. We have provided a Jupyter notebook instance, which is open source software for interactive computing\. It includes the editing code to execute and explanations for the entire process\.
 
@@ -21,33 +21,29 @@ Before you begin, be sure that you have created an AWS account, and the required
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-   Make sure you are in the US East \(N\. Virginia\) region\.
-
 1. Choose **Create bucket**\.
 
-1. On the **Name and region** screen:
+1. On the **Name and region** tab:
 
-   1. Name the bucket **deeplens\-sagemaker\-*<your\-name>***\. The bucket name must begin with **deeplens\-sagemaker\-** or the services will not be able to access it\.
+   1. Name the bucket **deeplens\-sagemaker\-*<some\_string>***, where *<some\_string>* can be any string to make the bucket name unique across AWS\. An example would be your account name or ID\.
+**Note**  
+The bucket name must begin with **deeplens\-sagemaker\-** to work with the default access policies\. Otherwise, the services will not be able to access it\.
 
    1. Verify that you are in the US East \(N\. Virginia\) region\.
 
    1. Choose **Next**\.
 
-1. On the **Set properties** screen choose **Next**\.
+1. On the **Configure options** tab, choose **Next**\.
 
-1. On the **Set permissions** screen, verify that both **Objects** and **Object permissions** have both the *Read* and *Write* permissions set, then choose **Next**\.
+1. On the **Set permissions** tab, choose **Grant Amazon S3 Log Delivery group write access to this bucket** from the **Manage system permissions** drop\-down menu, then choose **Next**\.
 
-1. On the **Review** screen, review your settings then choose **Create bucket** which creates your Amazon S3 bucket and returns you to the Amazon S3 screen\.
+1. On the **Review** tab, review your settings then choose **Create bucket**\.
 
-1. On the Amazon S3 screen, locate and choose your bucket's name\.
+1. On the created bucket's page, choose the **Overview** tab and then choose **Create folder**\. 
 
-1. On your bucket's screen, choose **Permissions**, then under **Public access** choose *Everyone*\.
+1. Name the folder *test* then choose **Save**\. 
 
-1. On the **Everyone** popup, under **Access to objects** enable *List objects* and *Write objects*\. Under **Access to this bucket's ACL** enable *Read bucket permissions* and *Write bucket permissions*, then choose **Save**\.
-
-1. After you return to your bucket's page, choose **Overview** then choose **Create folder**\.
-
-1. Name the folder *test* then choose **Save**\.
+   To use the folder with the example notebook instance to be created next, you must name the folder as `test`, unless you change the default folder name in the notebook\.
 
 ## Step 2: Create an Amazon SageMaker Notebook Instance<a name="create-sagemaker-notebook"></a>
 
@@ -57,18 +53,19 @@ Create an Amazon SageMaker notebook instance\.
 
    Make sure that you have chosen the `us-east-1` — US East \(N\. Virginia\) Region\.
 
-1. Choose **Create notebook instance**\.
+1. Choose **Notebook instances** from the navigation pane and then choose **Create notebook instance**\.
 
-1. On the **Create notebook instance** page, then do the following:  
-![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/im-create-notebook.png)
+1. On the **Create notebook instance** page, then do the following:
 
-   1. For **Notebook instance name**, type a name; for example, ***<your\-name>*\-hotdog**\.
+   1. Under **Notebook instance settings**, type a name for the notebook in the **Notebook instance name** input field; for example, ***<your\-name>*\-hotdog**\.
 
-   1. For **Instance type**, choose `ml.t2.medium`\.
+   1. For **Notebook instance type**, choose `ml.t2.medium`\.
 
-   1. For **IAM role ** choose **Enter a custom IAM role ARN**, paste the Amazon Resource Name \(ARN\) of your Amazon SageMaker role in the **Custom IAM role ARN** box\.
+   1. For **Permissions and encryption**, under **IAM role**, choose **Create a new role**, if this is the first time you run a notebook, type `deeplens-sagemaker` in the **Specific S3 buckets** input field, and then choose **Create role**\. 
 
-      To find the ARN of your Amazon SageMaker role:
+      After you've created the first notebook instance for AWS DeepLens, you can choose an available IAM role from the **Use existing role** list\. 
+
+      If you've already [created the AWSDeepLensSageMaker role](deeplens-required-iam-roles.md#deeplens-required-iam-roles-create-sagemaker-service) as part of the setup, choose **Enter a custom IAM role ARN**, paste the Amazon Resource Name \(ARN\) of your Amazon SageMaker role in the **Custom IAM role ARN** box\. You can find the ARN of your Amazon SageMaker role as follows:
 
       1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -82,7 +79,7 @@ Create an Amazon SageMaker notebook instance\.
          arn:aws:iam::account id:role/AWSDeepLensSagemakerRole
          ```
 
-   1. Both **VPC** and **Encryption key** are optional\. Skip them\.
+   1. All other settings are optional\. Skip them for this exercise\.
 **Tip**  
 If you want to access resources in your VPC from the notebook instance, choose a **VPC** and a **SubnetId**\. For **Security Group**, choose the default security group of the VPC\. The inbound and outbound rules of the default security group are sufficient for the exercises in this guide\.
 
@@ -96,11 +93,11 @@ In this step, you open the ***<your\-name>*\-hotdog** notebook and edit the obje
 
 1. Open the Amazon SageMaker console at [https://console\.aws\.amazon\.com/sagemaker/](https://console.aws.amazon.com/sagemaker/)\.
 
-1. Choose the US East \(N\. Virginia\) Region is chosen\.
+1. Make sure the US East \(N\. Virginia\) Region is chosen\.
 
 1. In the navigation pane, choose **Notebook instances**\.
 
-1. On the **Notebooks** page, choose the radio button to the left of the notebook instance that you just created \(***<your\-name>*\-hotdog**\)\. When the notebook's status is *InService*, choose **Open**\.
+1. On the **Notebooks** page, choose the radio button to the left of the notebook instance that you just created \(***<your\-name>*\-hotdog**\)\. When the notebook's status is *InService*, choose **Open Jupiter**\.
 
 1. Open a new tab in your browser and navigate to [https://github\.com/aws\-samples/reinvent\-2017\-deeplens\-workshop](https://github.com/aws-samples/reinvent-2017-deeplens-workshop)\.
 
@@ -130,7 +127,7 @@ You now upload the training file and use it to edit the model\.
 
    1. Read the step's description\.
 
-   1. If the block has code in it, place your cursor in the code block and run the code block\. To run a code block in Jupyter, use **Ctrl\+<Enter>** \(macOS **Cnd\_<Enter>**\) or choose the run icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-run-button.png)\)\.
+   1. If the block has code in it, place your cursor in the code block and run the code block\. To run a code block in Jupyter, use **Ctrl\+<Enter>** or choose the run icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-run-button.png)\)\.
 **Important**  
 Each step is numbered in a fashion such as `In [1]:`\. While the block is executing, that changes to `In [*]:`\. When the block finishes executing it returns to `In [1]:`\. Do not move on to the next code block while the current block is still running\.
 
@@ -146,7 +143,7 @@ Now that you have a trained mxNet model there is one final step that is required
 
 Import the edited model into AWS DeepLens\.
 
-1. Using your browser, open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Models**, then choose **Import model**\.
 
@@ -170,7 +167,7 @@ Use the AWS Lambda console to create a Lambda function that uses your model\. Fo
 
 Now create a new AWS DeepLens project and add the edited model to it\.
 
-1. Using your browser, open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. Choose **Projects**\.
 
@@ -190,7 +187,7 @@ Now create a new AWS DeepLens project and add the edited model to it\.
 
 ## Step 8: Review and Deploy the Project<a name="deploy-project"></a>
 
-1. Using your browser, open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+1. Open the AWS DeepLens console at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
 
 1. From the list of projects, choose the project that you just created, then choose **Deploy to device**\.
 

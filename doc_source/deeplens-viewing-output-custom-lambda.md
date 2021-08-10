@@ -3,13 +3,9 @@
 To view the project stream, you need an AWS Lambda function that interacts with the `mjpeg` stream on your device and the deep learning model\. For the sample projects included with AWS DeepLens, the code is included in the inference Lambda function for the project\. For your custom projects, you need to create a Lambda function that performs this task\.
 
 **Create a Lambda function for your custom projects**  
-Add the following sample code to your projects and change the model name and the dimensions as appropriate\. 
+Add the following sample code to your projects and change the model name and the dimensions as appropriate\. https://docs\.aws\.amazon\.com/deeplens/latest/dg/
 
 ```
-# ----------------------------------- 
-# Copyright Amazon AWS DeepLens, 2017
-# -----------------------------------
-
 import os
 import greengrasssdk
 from threading import Timer
@@ -25,8 +21,8 @@ client = greengrasssdk.client('iot-data')
 # a topic and a message body.
 # This is the topic that this code uses to send messages to the Cloud.
 iotTopic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
-ret, frame = awscam.getLastFrame()
-ret,jpeg = cv2.imencode('.jpg', frame) 
+_, frame = awscam.getLastFrame()
+_,jpeg = cv2.imencode('.jpg', frame)
 Write_To_FIFO = True
 class FIFO_Thread(Thread):
     def __init__(self):
@@ -54,7 +50,7 @@ def greengrass_infinite_infer_run():
         max_threshold = 0.25
         outMap = ({ 1: 'aeroplane', 2: 'bicycle', 3: 'bird', 4: 'boat', 
                     5: 'bottle', 6: 'bus', 7 : 'car', 8 : 'cat', 
-                    9 : 'chair', 10 : 'cow', 11 : 'dinning table', 
+                    9 : 'chair', 10 : 'cow', 11 : 'dining table',
                    12 : 'dog', 13 : 'horse', 14 : 'motorbike', 
                    15 : 'person', 16 : 'pottedplant', 17 : 'sheep', 
                    18 : 'sofa', 19 : 'train', 20 : 'tvmonitor' })
@@ -125,4 +121,4 @@ def function_handler(event, context):
     return
 ```
 
-After you've created and deployed the Lambda function, follow the instructions in [View Your AWS DeepLens Project Output in a Browser](deeplens-viewing-device-output-in-browser.md) or [Viewing a Project Stream on Your AWS DeepLens Device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) to view the processed project stream\. 
+After you've created and deployed the Lambda function, follow the instructions in [View Video Streams from AWS DeepLens Device in Browser](deeplens-viewing-device-output-in-browser.md) or [View Project Streams on Your AWS DeepLens Device](deeplens-viewing-device-output-on-device.md#deeplens-viewing-output-project-stream) to view the processed project stream\. 

@@ -15,3 +15,4 @@ We'll walk you through these tasks in this section\.
 + [Optimize a Custom Model](deeplens-optimize-model.md)
 + [Create and Publish an AWS DeepLens Inference Lambda Function](deeplens-inference-lambda-create.md)
 + [Create and Deploy a Custom AWS DeepLens Project](deeplens-create-custom-project.md)
++ [Use Amazon SageMaker Neo to Optimize Inference on AWS DeepLens](deeplens-compile-model-with-neo.md)
