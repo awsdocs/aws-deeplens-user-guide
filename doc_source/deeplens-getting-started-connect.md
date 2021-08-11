@@ -27,6 +27,8 @@ If Wi\-Fi indicator does not flash, the device in no longer in the setup mode\. 
    On a computer running Windows, choose **Connecting using a security key instead** instead of **Enter the PIN from the router label \(usually 8 digits\)** and then enter your device's Wi\-Fi password\.   
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/type-device-wifi-password-in-windows.png)
 
+
+
 After successfully connecting your computer to the device's Wi\-Fi network, you're now ready to launch the device setup application to [configure your device](deeplens-getting-started-set-up.md)\. 
 
 To launch the device setup app, do one of the following:
@@ -39,6 +41,8 @@ Alternatively, instead of `http://deeplens.amazon.net` or `http://deeplens.confi
  `http://192.168.0.1`, if the AWS DeepLens software package \(`awscam`\) version is less than 1\.2\.4
  `http://10.105.168.217`, if the AWS DeepLens software package \(`awscam`\) version is greater than or equal to 1\.2\.4
 For more information, see [Device Setup URL](troubleshooting-device-registration.md#troubleshooting-device-registration-8)\.
+
+
 
 ## Connect to AWS DeepLens Device Using Monitor, Mouse and Keyboard<a name="connect-to-v1-device-directly-with-monitor-mouse-keyboard"></a>
 

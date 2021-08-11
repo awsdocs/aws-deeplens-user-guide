@@ -14,7 +14,7 @@ model = awscam.Model(model_topology_file, loading_config, runtime=0)
 
   Neo\-compiled models support only the Classification model type\. Other models support Classification, Segmentation, and Single Shot MultiBox Detector \(SSD\)\.
 **Note**  
- When deploying an Amazon SageMaker\-trained SSD model, you must first run `deploy.py` \(available from [https://github\.com/apache/incubator\-mxnet/tree/master/example/ssd/](https://github.com/apache/incubator-mxnet/tree/master/example/ssd/)\) to convert the model artifact into a deployable mode\. After cloning or downloading [the MXNet repository](https://github.com/apache/incubator-mxnet), run the `git reset --hard 73d88974f8bca1e68441606fb0787a2cd17eb364` command before calling `deploy.py` to convert the model, if the latest version does not work\.
+When deploying an SageMaker\-trained SSD model, you must first run `deploy.py` \(available from [https://github\.com/apache/incubator\-mxnet/tree/v1\.x/example/ssd/](https://github.com/apache/incubator-mxnet/tree/v1.x/example/ssd/)\) to convert the model artifact into a deployable model\. After cloning or downloading the MXNet repository, run the `git reset --hard 73d88974f8bca1e68441606fb0787a2cd17eb364` command before calling `deploy.py` to convert the model, if the latest version does not work\.
 + `loading_config` \(dict\)—Required\. Specifies whether the model should be loaded into the GPU or CPU\. The format of this parameter is a dictionary\.
 
 **Valid values:**

@@ -5,7 +5,7 @@ Notifies the producer to stop sending video feeds from your AWS DeepLens device 
 **Syntax**
 
 ```
-[stream](dkv-stream-object.md).stop()
+stream.stop()
 ```
 
 **Parameters**

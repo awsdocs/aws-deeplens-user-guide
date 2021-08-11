@@ -1,10 +1,10 @@
-# Train a Head Pose Detection Model in Amazon SageMaker<a name="deeplens-headpose-project-train-model-using-sagemaker"></a>
+# Train a Head Pose Detection Model in SageMaker<a name="deeplens-headpose-project-train-model-using-sagemaker"></a>
 
-To train our model in Amazon SageMaker, follow the steps below to create a Notebook using the Amazon SageMaker console:
+To train our model in SageMaker, follow the steps below to create a Notebook using the SageMaker console:
 
-**Create an Amazon SageMaker Notebook**
+**Create an SageMaker Notebook**
 
-1. Sign in to the Amazon SageMaker console at [https://console\.aws\.amazon\.com/sagemaker/home?region=us\-east\-1](https://console.aws.amazon.com/sagemaker/home?region=us-east-1)\.
+1. Sign in to the SageMaker console at [https://console\.aws\.amazon\.com/sagemaker/home?region=us\-east\-1](https://console.aws.amazon.com/sagemaker/home?region=us-east-1)\.
 
 1. From the main navigation pane, choose **Notebook instances**\.
 
@@ -23,19 +23,19 @@ To train our model in Amazon SageMaker, follow the steps below to create a Noteb
 1. In the file picker, navigate to the **HeadPost\_SageMaker\_PythonSDK** folder in the previously cloned or downloaded **headpose\-estimator\-apache\-mxnet\-master** project folder\. Then, select the following files: 
    + **resnet\_headpose\.py**: This is a script that defines the workflow for training with the deep learning network architecture prescribed in the accompanying **resnet\_model\_headpose\.py** file applied to a specified input data\.
    + **resnet\_model\_headpose\.py**: This is a Python script that prescribes the deep learning network architecture used to train our model for head pose detection\.
-   + **tensorflow\_resnet\_headpost\_for\_deeplens\.ipynb**: This is a Notebook instance to run an Amazon SageMaker job to manage training following the script of **resnet\_headpose\.py**, including data preparation and transformation\.
+   + **tensorflow\_resnet\_headpost\_for\_deeplens\.ipynb**: This is a Notebook instance to run an SageMaker job to manage training following the script of **resnet\_headpose\.py**, including data preparation and transformation\.
 
    Then, choose **Open**\.
 
    If you intend to run the preprocessing script on the AWS Cloud, navigate to the **headpose\-estimator\-apache\-mxnet\-master** folder, select the **preprocessingDataset\_py2\.py**, and choose **Open**\. 
 
-1. On the **Files** tab in the **TFHeadpose** notebook, choose **Upload** for each of the newly selected files to finish importing the files into the notebook\. You're now ready to run an Amazon SageMaker job to train your model\.
+1. On the **Files** tab in the **TFHeadpose** notebook, choose **Upload** for each of the newly selected files to finish importing the files into the notebook\. You're now ready to run an SageMaker job to train your model\.
 
-1. Choose **tensorflow\_resnet\_headpose\_for\_deeplens\.ipynb** to open the notebook instance in a separate browser tab\. The notebook instance lets you step through the tasks necessary to run an Amazon SageMaker job to train your model and to transform the model artifacts to a format supported by AWS DeepLens\.
+1. Choose **tensorflow\_resnet\_headpose\_for\_deeplens\.ipynb** to open the notebook instance in a separate browser tab\. The notebook instance lets you step through the tasks necessary to run an SageMaker job to train your model and to transform the model artifacts to a format supported by AWS DeepLens\.
 
-1.  Run an Amazon SageMaker job to train your model in the notebook instance\. The implementation is presented in separate code cells that can be run sequentially\.
+1.  Run an SageMaker job to train your model in the notebook instance\. The implementation is presented in separate code cells that can be run sequentially\.
 
-   1. Under **Set up the environment**, the code cell contains the Python code to configure the data store for the input and output of the Amazon SageMaker model training job\. 
+   1. Under **Set up the environment**, the code cell contains the Python code to configure the data store for the input and output of the SageMaker model training job\. 
 
       ```
       import os
@@ -217,9 +217,9 @@ To train our model in Amazon SageMaker, follow the steps below to create a Noteb
 
          In the code above, you must specify the input and output nodes, namely, `'Const_1'` and `'softmax_tensor'`\. For more details, see the **resnet\_model\_headpose\.py**\.
 
-         When creating an AWS DeepLens project later, you'll need to add this frozen graph to the project\. For this you must upload the protobuff file to an Amazon S3 folder\. For this tutorial, you can use your Amazon SageMaker traing job's output folder \(`s3://deeplens-sagemaker-models-<my-name>/headpose/TFartifacts/<sagemaker-job-name>/output`\) in S3\. However, the model is considered an externally trained model in AWS DeepLens\.
+         When creating an AWS DeepLens project later, you'll need to add this frozen graph to the project\. For this you must upload the protobuff file to an Amazon S3 folder\. For this tutorial, you can use your SageMaker traing job's output folder \(`s3://deeplens-sagemaker-models-<my-name>/headpose/TFartifacts/<sagemaker-job-name>/output`\) in S3\. However, the model is considered an externally trained model in AWS DeepLens\.
 
-   1. To upload the frozen graph to your Amazon SageMaker training job's output folder, run the following Python code snippet in a code cell of the running notebook instance:
+   1. To upload the frozen graph to your SageMaker training job's output folder, run the following Python code snippet in a code cell of the running notebook instance:
 
       ```
       data = open('frozen_model.pb', "rb")

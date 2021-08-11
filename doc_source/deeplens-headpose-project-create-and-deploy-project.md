@@ -1,8 +1,8 @@
 # Create and Deploy the Head Pose Detection Project<a name="deeplens-headpose-project-create-and-deploy-project"></a>
 
-Before creating the AWS DeepLens project, your must import the model into AWS DeepLens\. Because the original Amazon SageMaker\-trained model artifact is converted to a protobuff file, you must treat the transformed model artifact as externally trained\.<a name="deeplens-tutorial-headpose-detection-import-model"></a>
+Before creating the AWS DeepLens project, your must import the model into AWS DeepLens\. Because the original SageMaker\-trained model artifact is converted to a protobuff file, you must treat the transformed model artifact as externally trained\.<a name="deeplens-tutorial-headpose-detection-import-model"></a>
 
-**To import the customized Amazon SageMaker\-trained model for head pose detection**
+**To import the customized SageMaker\-trained model for head pose detection**
 
 1. Go to the AWS DeepLens console\.
 
@@ -48,6 +48,10 @@ After importing the model, you can now create an AWS DeepLens project to add the
 
 1. Choose **Create**\.
 
+    
+
+
+
 With the project created, you're ready to deploy it to your registered AWS DeepLens device\. Make sure to remove any active project from the device before proceeding further\.
 
 1. In the **Projects** page of the DAWS DeepLensL console, choose the newly created project for head pose detection\.
@@ -62,8 +66,10 @@ With the project created, you're ready to deploy it to your registered AWS DeepL
 
 1. After the project is successfully deployed, you can view the project output in one of the following ways: 
 
-   1. View the JSON\-formatted output published by the inference Lambda function in the AWS IoT Core console\. For instructions, see [View Your AWS DeepLens Project Output in the AWS IoT Console](deeplens-viewing-project-output-json.md)\.
+   1. View the JSON\-formatted output published by the inference Lambda function in the AWS IoT Core console\. 
 
    1. View streaming video in a supported web browser\. For instructions, [View Video Streams from AWS DeepLens Device in Browser](deeplens-viewing-device-output-in-browser.md)\.
+
+
 
 This completes this tutorial to build and deploy your head pose detection project\. 

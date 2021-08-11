@@ -4,7 +4,8 @@ Use the following guidelines to troubleshoot issues with AWS DeepLens device reg
 
 **Topics**
 + [Why Does My Attempt to Use the AWS DeepLens Console to Register a Device Go into an Apparently Endless Loop and Fail to Complete?](#troubleshooting-device-registration-v1.1-device-no-windows7-ie11)
-+ [How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?](#troubleshooting-undetected-v1.1-device)
++ [My AWS DeepLens 2019 Edition\(v1\.1\) Device Isn't Detected During Registration](#troubleshooting-undetected-v1.1-device)
++ [How to Perform a First\-Time Update on a AWS DeepLens v1\.1 Device](#troubleshooting-device-registration-v1.1-firsttimeupdate)
 + [How to Turn your Device Back to its Setup Mode to Complete Device Registration or Update Device Settings?](#troubleshooting-device-registration-1)
 + [How to Connect Your Device to Your Home or Office Wi\-Fi Network When the Wi\-Fi SSID or Password Contains Special Characters?](#troubleshooting-device-wifi-connection)
 + [What IAM Roles to Choose When None Is Available?](#troubleshooting-device-registration-2)
@@ -25,20 +26,58 @@ Use the following guidelines to troubleshoot issues with AWS DeepLens device reg
 **Unsupported Browser for the AWS DeepLens Console**
 +  Internet Explorer 11 on Windows 7 
 
-## How to Ensure My AWS DeepLens 2019 Edition Device Is Detectable During Registration?<a name="troubleshooting-undetected-v1.1-device"></a>
+## My AWS DeepLens 2019 Edition\(v1\.1\) Device Isn't Detected During Registration<a name="troubleshooting-undetected-v1.1-device"></a>
 
- When registering your AWS DeepLens 2019 Edition device, your computer may not detect the device after you've connected your device to your computer with a USB cable\. This would prevent your from completing the registration\. 
+When registering your AWS DeepLens 2019 Edition\(v1\.1\) device, your computer might not detect the device after you've connected it to your computer with a USB cable\. This prevents  completing registration\. 
 
- To ensure that your device can be detected, make sure the following conditions are met: 
+ To ensure that your device can be detected, make sure that: 
 + Your device is powered on\.
 + Your computer is connected to the device through the REGISTRATION USB port at the bottom\.
-+ Your computer is not connected to Ethernet and a VPN network\.
-+ Your firewall is not blocking the DeepLens network connection\. 
-+ You’re using Chrome, Firefox or Safari and have the latest OS update installed\.
++ Your computer isn't connected to Ethernet and a VPN network\.
++ Your firewall isn't blocking the AWS DeepLens network connection\. 
++ You’re using Chrome, Firefox, or Safari and have installed the latest operating system update\.
 
- If the above conditions are met and your device still remains undetected, disconnect and reconnect the USB cable to the REGISTRATION USB port on the device, then wait for a minute or two\. 
+If your computer still doesn't detect your device, disconnect the USB cable from the REGISTRATION USB port on the device, reconnect it, and wait for a couple of minutes\. 
 
- The network interface service order on your computer may play a role to prevent your device from being detected during registration\. For example, if the USB\-C interface has a higher preference over the standard USB interface on your computer, your computer could default to USB\-C to scan attached USB devices\. Your AWS DeepLens device would become invisible\. In this case, you need to reorder the preference of network types\. To do so, you can follow, for example, [this tip on a Mac computer](https://thesweetsetup.com/set-network-service-order-macos-high-sierra/) or [this tip on a Windows computer](https://www.windowscentral.com/how-change-priority-order-network-adapters-windows-10)\. 
+If that doesn't work, check the network interface service order on your computer\. The network interface service order can prevent your device from being detected during registration\. For example, if the USB\-C interface has a higher preference over the standard USB interface on your computer, your computer could default to the USB\-C port to scan attached USB devices\. As a result, your AWS DeepLens device would be invisible to your computer\. In this case, reorder the preference of network types\. To do so, see [How to prioritize which internet connection your Mac uses](https://thesweetsetup.com/set-network-service-order-macos-high-sierra/) or [How to change the priority order of network adapters on Windows 10](https://www.windowscentral.com/how-change-priority-order-network-adapters-windows-10)\. 
+
+## How to Perform a First\-Time Update on a AWS DeepLens v1\.1 Device<a name="troubleshooting-device-registration-v1.1-firsttimeupdate"></a>
+
+If you have a AWS DeepLens 2019 \(v1\.1\) device shipped before 3/28/2020 and it is not running software version v1\.4\.5, you may need to perform a one\-time software update\. 
+
+To perform the update, you will need:
++ A small paperclip or pin to reset the device
++ AWS DeepLens 2019 \(v1\.1\) device and power supply
+
+**To perform a first\-time update:**
+
+1. Plug in your AWS DeepLens device\.
+
+1. On the back of the AWS DeepLens device, insert a paper clip or pin into the reset pinhole\. After you hear a click, wait about 20 seconds for the Wi\-Fi indicator \(middle light\) to blink\. 
+
+   When the Wi\-Fi indicator blinks, your device is in setup mode\.
+
+1. Sign in to the AWS Management Console for AWS DeepLens at [https://console\.aws\.amazon\.com/deeplens/](https://console.aws.amazon.com/deeplens/)\.
+
+1. In the AWS DeepLens console, select **Register device**\. 
+
+1. Select **HW v1**\.
+**Warning**  
+You must select HW v1 even though your device is v1\.1\.
+
+1. Provide a name your AWS DeepLens device\. select **Download the certificates**\. to download the certificates onto your computer\. 
+
+1. Select **Download the certificates** to download the certificates onto your computer\. 
+
+1. Follow the instructions on screen to connect to the AWS DeepLens Wi\-Fi network and continue the registration process\.
+
+1. Once you’ve complete the registration process, you will see a notice inside the device details page stating that an update is available for your device\. Scroll down to the bottom click **Update**\. 
+**Note**  
+It can take 10 mins for your device to update\.
+
+1. When the update has completed, the device will restart\. When the device goes back online, it will be updated to v1\.4\.5\.
+
+Once your AWS DeepLens device is updated to v1\.4\.5, you can use the USB cable for future updates\. 
 
 ## How to Turn your Device Back to its Setup Mode to Complete Device Registration or Update Device Settings?<a name="troubleshooting-device-registration-1"></a>
 
@@ -103,7 +142,7 @@ If you've chosen **Finish**, follow **Step 1\-3** above to get back to the devic
 
 ## What IAM Roles to Choose When None Is Available?<a name="troubleshooting-device-registration-2"></a>
 
-If [the required IAM roles](deeplens-required-iam-roles.md) are not available in your account when you register your device using the AWS DeepLens console for the first, you will be prompted to create the roles with a single click of button\. If you wish to create the required IAM roles without using the AWS DeepLens console, follow the instructions in [Create IAM Roles for Your AWS DeepLens Project](deeplens-required-iam-roles.md#deeplens-required-iam-role-create)\.
+If the required IAM roles are not available in your account when you register your device using the AWS DeepLens console for the first, you will be prompted to create the roles with a single click of button\. 
 
 ## How to View Project Output in the Chrome Browser on Mac El Capitan or Earlier?<a name="troubleshooting-view-project-output-in-chrome-on-mac-elcapitan-or-earlier"></a>
 

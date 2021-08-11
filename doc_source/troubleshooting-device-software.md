@@ -1,8 +1,9 @@
 # Troubleshooting AWS DeepLens Software Issues<a name="troubleshooting-device-software"></a>
 
-The following troubleshooting tips explain how to resolve issues that you might encounter with AWS DeepLens software\.
+The following troubleshooting tips explain how to resolve issues that you might encounter with AWS DeepLens software\. 
 
 **Topics**
++ [How to handle an `import error – undefined symbol`?](#troubleshooting-device-software-awscam)
 + [How to Determine Which Version of AWS DeepLens Software You Have?](#troubleshooting-device-software-version)
 + [How to Check the Latest Version of the awscam Software Package?](#troubleshooting-device-software-awscam-version)
 + [How to Reactivate Wi\-Fi Hotspots After Restarting the Device?](#troubleshooting-device-software-wifi-hotspots)
@@ -11,6 +12,24 @@ The following troubleshooting tips explain how to resolve issues that you might 
 + [How to Upgrade the awscam Software Package Dependencies?](#troubleshooting-device-software-awscam-dependencies)
 + [How to Install Security Updates on the Device?](#troubleshooting-device-software-security-updates)
 + [How to Handle Unsupported Architecture During a Device Update?](#troubleshooting-device-software-unsupported-architecture)
+
+## How to handle an `import error – undefined symbol`?<a name="troubleshooting-device-software-awscam"></a>
+
+When writing a custom AWS Lambda inference function, if you import the `awscam` module prior to the `cv2` module you will get an error like the following: 
+
+```
+File "my_lambda_detector.py", line 5, in
+import awscam
+File "/usr/lib/python2.7/dist-packages/awscam/__init__.py", line 1, in
+from .model import *
+File "/usr/lib/python2.7/dist-packages/awscam/model.py", line 14, in
+from awscamdldt import getLastFrame
+ImportError: /opt/awscam/intel/deeplearning_deploymenttoolkit/deployment_tools/inference_engine/lib/intel64/
+libinference_engine.so: undefined symbol:
+_ZN3tbb10interface78internal15task_arena_base24internal_max_concurrencyEPKNS0_10task_arenaE
+```
+
+To resolve the error, you need to update the order of the imported modules in your import statement\. Make sure that you are importing the `awscam` module prior to the `cv2` module\. 
 
 ## How to Determine Which Version of AWS DeepLens Software You Have?<a name="troubleshooting-device-software-version"></a>
 
@@ -46,6 +65,8 @@ The software on the AWS DeepLens device is a Debian package named `awscam`\. To 
    +++-==============-===========-===============-===============
    ii  awscam         1.2.3      amd64           awscam
    ```
+
+   
 
 ## How to Check the Latest Version of the awscam Software Package?<a name="troubleshooting-device-software-awscam-version"></a>
 

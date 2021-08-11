@@ -1,6 +1,6 @@
-# Use Amazon SageMaker Neo to Optimize Inference on AWS DeepLens<a name="deeplens-compile-model-with-neo"></a>
+# Use SageMaker Neo to Optimize Inference on AWS DeepLens<a name="deeplens-compile-model-with-neo"></a>
 
-A trained model might not be optimized to run inference on your device\. Before you deploy a trained model to your AWS DeepLens, you can use [Amazon SageMaker Neo](https://docs.aws.amazon.com/sagemaker/latest/dg/neo) to optimize it to run inference on the AWS DeepLens hardware\. The process involves these steps: 
+A trained model might not be optimized to run inference on your device\. Before you deploy a trained model to your AWS DeepLens, you can use [SageMaker Neo](https://docs.aws.amazon.com/sagemaker/latest/dg/neo) to optimize it to run inference on the AWS DeepLens hardware\. The process involves these steps: 
 
 1. Compile the model\.
 
@@ -52,7 +52,7 @@ aws sagemaker create-compilation-job \
 --region us-west-2
 ```
 
- In addition to AWS CLI, you can also use the Amazon SageMaker console or the Amazon SageMaker SDK to create and run the compilation job\. To learn more, see use [the Amazon SageMaker console](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-job-compilation-console.html) and [Amazon SageMaker SDK](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-job-compilation-sagemaker-sdk.html) to compile a trained model\. 
+ In addition to AWS CLI, you can also use the SageMaker console or the SageMaker SDK to create and run the compilation job\. To learn more, see use [the SageMaker console](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-job-compilation-console.html) and [SageMaker SDK](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-job-compilation-sagemaker-sdk.html) to compile a trained model\. 
 
 ## Import a Compiled Model into the AWS DeepLens Console<a name="deeplens-import-compiled-model-into-console"></a>
 

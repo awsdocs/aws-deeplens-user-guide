@@ -5,7 +5,7 @@ Creates a Kinesis Video Streams stream object to send video feeds from the AWS D
 **Syntax**
 
 ```
-stream = [producer](dkv-producer-object.md).createStream(stream_name, retention)
+stream = producer.createStream(stream_name, retention)
 ```
 
 **Parameters**

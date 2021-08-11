@@ -1,8 +1,8 @@
-# Prepare Input Data for Training In Amazon SageMaker<a name="deeplens-headpose-project-prepare-training-data"></a>
+# Prepare Input Data for Training In SageMaker<a name="deeplens-headpose-project-prepare-training-data"></a>
 
-The original [head pose image database \(HeadPoseImageDatabase\.tar\.gz file\)](http://www-prima.inrialpes.fr/perso/Gourier/Faces/HeadPoseImageDatabase.tar.gz) consists of a set of images \(\.jpeg files\) and labels \(\.txt files\) of head poses of 15 persons in a series of tilt and pan positions\. They must be transformed to a single \.pkl file as the input to an Amazon SageMaker training job\. 
+The original [head pose image database \(HeadPoseImageDatabase\.tar\.gz file\)](http://www-prima.inrialpes.fr/perso/Gourier/Faces/HeadPoseImageDatabase.tar.gz) consists of a set of images \(\.jpeg files\) and labels \(\.txt files\) of head poses of 15 persons in a series of tilt and pan positions\. They must be transformed to a single \.pkl file as the input to an SageMaker training job\. 
 
-To prepare the training data, you can use the preprocessing script \(preprocessingDataset\_py2\.py\) provided in the [Head Pose Sample Project on Github](deeplens-headpose-project-source-on-github.md)\. You can run this script on your computer locally or on the AWS Cloud through a Python Notebook instance\. In this section, you'll learn how to prepare the training data locally\. You'll learn how to do it in a Notebook instance in [Train a Head Pose Detection Model in Amazon SageMaker](deeplens-headpose-project-train-model-using-sagemaker.md)\.
+To prepare the training data, you can use the preprocessing script \(preprocessingDataset\_py2\.py\) provided in the [Head Pose Sample Project on Github](deeplens-headpose-project-source-on-github.md)\. You can run this script on your computer locally or on the AWS Cloud through a Python Notebook instance\. In this section, you'll learn how to prepare the training data locally\. You'll learn how to do it in a Notebook instance in [Train a Head Pose Detection Model in SageMaker](deeplens-headpose-project-train-model-using-sagemaker.md)\.
 
 1. Open a terminal and change directory to the directory where to you downloaded the [head pose sample project](deeplens-headpose-project-source-on-github.md)\.
 
@@ -29,7 +29,7 @@ To prepare the training data, you can use the preprocessing script \(preprocessi
    ```
 
 **Note**  
-Instead of running locally, you can prepare the input data on the AWS Cloud by a code cell in a Amazon SageMaker notebook instance, where `cv2` and Python 2\.7 \(`python2`\) are readily available, and run the commands in **Step 2** and **Step 3**, respectively, as follows:  
+Instead of running locally, you can prepare the input data on the AWS Cloud by a code cell in a SageMaker notebook instance, where `cv2` and Python 2\.7 \(`python2`\) are readily available, and run the commands in **Step 2** and **Step 3**, respectively, as follows:  
 
 ```
 !python2 preprocessingDataset_py2.py --num-data-aug 15 --aspect-ratio 1

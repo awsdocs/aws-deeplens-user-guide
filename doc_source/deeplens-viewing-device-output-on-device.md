@@ -8,7 +8,9 @@ Instead of connecting to the device directly using a monitor, a keyboard, and a 
 + [View Live Streams on Your AWS DeepLens Device](#deeplens-viewing-output-device-stream)
 + [View Project Streams on Your AWS DeepLens Device](#deeplens-viewing-output-project-stream)
 
-## View Live Streams on Your AWS DeepLens Device<a name="deeplens-viewing-output-device-stream"></a><a name="deeplens-view-device-stream-on-device-proc"></a>
+## View Live Streams on Your AWS DeepLens Device<a name="deeplens-viewing-output-device-stream"></a>
+
+<a name="deeplens-view-device-stream-on-device-proc"></a>
 
 **To view an unprocessed device stream on your AWS DeepLens device**
 

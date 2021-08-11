@@ -1,8 +1,8 @@
-# View Video Streams from AWS DeepLens 2019 Edition Device in Browser<a name="deeplens-viewing-video-streams-from-v1.1-device-in-browser"></a>
+# View Video Streams from AWS DeepLens 2019 Edition\(v1\.1\) Device in Browser<a name="deeplens-viewing-video-streams-from-v1.1-device-in-browser"></a>
 
- To view project or live streams from the AWS DeepLens 2019 Edition device in a browser, you must have the device's self\-signed streaming certificate downloaded to your computer and then uploaded to a supported browser you'll use\. For instructions on how to download the streaming certificate and install it into the browser, see **Step 6** of [View or Update Your AWS DeepLens 2019 Edition Device Settings](deeplens-v11-device-view-or-edit-settings.md)\.
+ To view project or live streams from the AWS DeepLens 2019 Edition\(v1\.1\) device in a browser, you must have the device's self\-signed streaming certificate downloaded to your computer and then uploaded to a supported browser you'll use\. For instructions on how to download the streaming certificate and install it into the browser, see **Step 6** of [View or Update Your AWS DeepLens 2019 Edition\(v1\.1\) Device Settings](deeplens-v11-device-view-or-edit-settings.md)\.
 
-**To view video streams from AWS DeepLens 2019 Edition device in a browswer**
+**To view video streams from AWS DeepLens 2019 Edition\(v1\.1\) device in a browser**
 
 1. Connect the device to your computer with the provided USB cable, if it's not already connected\.
 

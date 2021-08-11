@@ -5,7 +5,7 @@ Returns a boolean flag to indicate whether the producer is sending data to this 
 **Syntax**
 
 ```
-[stream](dkv-stream-object.md).isActive
+stream.isActive
 ```
 
 **Parameters**

@@ -3,6 +3,8 @@
 AWS DeepLens supports the following Apache MXNet deep learning models from the Gluon model zoo that are exposed by the Gluon API\.
 
 
+
+
 | Supported Gluon Models |  Model | Description | 
 | --- | --- | --- | 
 |   AlexNet   |  Image classification model trained on the ImageNet dataset imported from the Open Neural Network Exchange \(ONNX\)\.   | 

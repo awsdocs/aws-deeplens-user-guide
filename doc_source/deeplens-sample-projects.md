@@ -8,4 +8,4 @@ AWS DeepLens provides several sample projects for you to deploy and run inferenc
 + [AWS DeepLens Sample Projects Overview](deeplens-templated-projects-overview.md)
 + [Create and Deploy an AWS DeepLens Sample Project in the AWS DeepLens Console](deeplens-create-deploy-sample-project.md)
 + [Relay an AWS DeepLens Project Output through AWS SMS](deeplens-extend.md)
-+ [Use Amazon SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)
++ [Use SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)

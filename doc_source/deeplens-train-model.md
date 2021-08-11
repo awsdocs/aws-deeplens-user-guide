@@ -1,13 +1,13 @@
-# Use Amazon SageMaker to Provision a Pre\-trained Model for a Sample Project<a name="deeplens-train-model"></a>
+# Use SageMaker to Provision a Pre\-trained Model for a Sample Project<a name="deeplens-train-model"></a>
 
-In this example, you start with a SqueezeNet object detection model and use Amazon SageMaker to train it to perform binary classification to determine whether an object is a hot dog\. The example shows you how to edit a model to perform binary classification, and explains learning rate and epochs\. We have provided a Jupyter notebook instance, which is open source software for interactive computing\. It includes the editing code to execute and explanations for the entire process\.
+In this example, you start with a SqueezeNet object detection model and use SageMaker to train it to perform binary classification to determine whether an object is a hot dog\. The example shows you how to edit a model to perform binary classification, and explains learning rate and epochs\. We have provided a Jupyter notebook instance, which is open source software for interactive computing\. It includes the editing code to execute and explanations for the entire process\.
 
 After training the model, you import its artifacts into AWS DeepLens, and create a project\. You then watch as your AWS DeepLens detects and identifies hot dogs\.
 
 **Topics**
 + [Step 1: Create an Amazon S3 Bucket](#create-s3-bucket)
-+ [Step 2: Create an Amazon SageMaker Notebook Instance](#create-sagemaker-notebook)
-+ [Step 3: Edit the Model in Amazon SageMaker](#edit-model-sagemaker)
++ [Step 2: Create an SageMaker Notebook Instance](#create-sagemaker-notebook)
++ [Step 3: Edit the Model in SageMaker](#edit-model-sagemaker)
 + [Step 4: Optimize the Model](#optimize-model)
 + [Step 5: Import the Model](#import-model)
 + [Step 6: Create an Inference Lambda Function](#create-lambda)
@@ -45,9 +45,9 @@ The bucket name must begin with **deeplens\-sagemaker\-** to work with the defau
 
    To use the folder with the example notebook instance to be created next, you must name the folder as `test`, unless you change the default folder name in the notebook\.
 
-## Step 2: Create an Amazon SageMaker Notebook Instance<a name="create-sagemaker-notebook"></a>
+## Step 2: Create an SageMaker Notebook Instance<a name="create-sagemaker-notebook"></a>
 
-Create an Amazon SageMaker notebook instance\.
+Create an SageMaker notebook instance\.
 
 1. Open the Amazon SageMaker console at [https://console\.aws\.amazon\.com/sagemaker/](https://console.aws.amazon.com/sagemaker/)\.
 
@@ -65,7 +65,7 @@ Create an Amazon SageMaker notebook instance\.
 
       After you've created the first notebook instance for AWS DeepLens, you can choose an available IAM role from the **Use existing role** list\. 
 
-      If you've already [created the AWSDeepLensSageMaker role](deeplens-required-iam-roles.md#deeplens-required-iam-roles-create-sagemaker-service) as part of the setup, choose **Enter a custom IAM role ARN**, paste the Amazon Resource Name \(ARN\) of your Amazon SageMaker role in the **Custom IAM role ARN** box\. You can find the ARN of your Amazon SageMaker role as follows:
+      If you've already  created the AWSDeepLensSageMaker role as part of the setup, choose **Enter a custom IAM role ARN**, paste the Amazon Resource Name \(ARN\) of your SageMaker role in the **Custom IAM role ARN** box\. You can find the ARN of your SageMaker role as follows:
 
       1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -87,7 +87,7 @@ If you want to access resources in your VPC from the notebook instance, choose a
 
       Your new notebook instance is now available on the **Notebooks** page\.
 
-## Step 3: Edit the Model in Amazon SageMaker<a name="edit-model-sagemaker"></a>
+## Step 3: Edit the Model in SageMaker<a name="edit-model-sagemaker"></a>
 
 In this step, you open the ***<your\-name>*\-hotdog** notebook and edit the object detection model so it recognizes a hot dog\. The notebook contains explanations to help you through each step\. 
 

@@ -2,6 +2,8 @@
 
 Configuring your AWS account for your AWS DeepLens device involves naming the device, grant AWS access permissions, and download a certificate for the device to be authenticated by AWS\.
 
+
+
 **To configure your AWS account for AWS DeepLens device**
 
 1. Sign in to the AWS Management Console for AWS DeepLens at [https://console\.aws\.amazon\.com/deeplens/home?region=us\-east\-1\#firstrun](https://console.aws.amazon.com/deeplens/home?region=us-east-1#firstrun)\.
@@ -10,14 +12,10 @@ Configuring your AWS account for your AWS DeepLens device involves naming the de
 
 1. On the **Choose a hardware version** dialog window, choose the **HW v1** radio button for your AWS DeepLens device\. Then choose **Start**\. 
 
-1. In the **Name your device** section on the **Configure your AWS account** page, type a name \(e\.g\., `My_DeepLens_1`\) for your AWS DeepLens device in the **Device name** text field \.
+1. In the **Name your device** section on the **Configure your AWS account** page, type a name \(e\.g\., `My-DeepLens-1`\) for your AWS DeepLens device in the **Device name** text field \.
 
    The device name can have up to 100 characters\. Valid characters are a\-z, A\-Z, 0\-9, and \- \(hyphen\) only\.   
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-registration-name-device.png)
-
-1. In the **Permissions** section, choose **Create roles** for the AWS DeepLens console to create [the required IAM roles with relevant permissions](deeplens-required-iam-roles.md) on your behalf\. 
-
-   After the roles are successfully created, you'll be informed that you have the necessary permissions for setting the AWS DeepLens device\. If the roles already exist in your account, the same message will be displayed\.
 
 1.  In the **Certificate** section, choose **Download certificate** to save the device certificate\. 
 **Important**  

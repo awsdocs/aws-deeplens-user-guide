@@ -7,7 +7,7 @@ This section demonstrates how to extend your AWS DeepLens projects to interact w
 + Anomaly detection models to detect the number of people walking in front of your store using Kinesis Data Analytics\.
 + A face detection and celebrity recognition application to identity VIPs around you using Amazon Rekognition\. 
 
-In this exercise, you modify the project you previously created and edited \(see [Use Amazon SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)\) to use the AWS IoT rules engine and an AWS Lambda function\.
+In this exercise, you modify the project you previously created and edited \(see [Use SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)\) to use the AWS IoT rules engine and an AWS Lambda function\.
 
 **Topics**
 + [Create and Configure the Lambda Function](#deeplens-create-configure-lambda-function)

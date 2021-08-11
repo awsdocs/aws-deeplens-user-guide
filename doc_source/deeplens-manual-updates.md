@@ -34,6 +34,8 @@ When you set up your device, you had the option to enable automatic updates \(se
    1. From the **Device details** section, copy a local IP address of the selected AWS DeepLens device\.  
 ![\[\]](http://docs.aws.amazon.com/deeplens/latest/dg/images/deeplens-device-local-ipaddresses.png)
 
+    
+
 1. Start a terminal and type the following SSH command, using the above example's IP address \(`192.168.1.36`\):
 
    ```

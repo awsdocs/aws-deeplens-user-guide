@@ -38,7 +38,7 @@ Running inference in the Intel DLDT runtime on a model with an output layer name
 }
 ```
 
-If the Neo runtime \(`runtime=1`\) is used to run the inference, the raw inference result is a `dict` object, where `results[i]` holds the `ith` output layer\. For example, for an image classification network such as Resnet\-50 with only one Softmax output layer, `results[0]` is a `Numpy` array with size `N x 1` that gives the probability for each of the `N` labeled image types\. 
+If the Neo runtime \(`runtime=1`\) is used to run the inference, the raw inference result is a `dict` object, where `results[i]` holds the `ith` output layer\. For example, for an image classification network such as ResNet\-50 with only one Softmax output layer, `results[0]` is a `Numpy` array with size `N x 1` that gives the probability for each of the `N` labeled image types\. 
 
 The following example output shows the raw inference result of the same model \(above\) running in the Neo runtime\.
 

@@ -5,7 +5,7 @@ Notifies the producer to start sending video feeds from your AWS DeepLens device
 **Syntax**
 
 ```
-[stream](dkv-stream-object.md).start()
+stream.start()
 ```
 
 **Parameters**

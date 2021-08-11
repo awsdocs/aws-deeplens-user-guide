@@ -19,7 +19,7 @@ This project shows you how a deep learning model can detect and recognize object
 The project uses the [Single Shot MultiBox Detector \(SSD\)](http://gluon.mxnet.io/chapter08_computer-vision/object-detection.html) framework to detect objects with a pretrained [resnet\_50 network](https://gluon-cv.mxnet.io/model_zoo/index.html)\. The network has been trained on the [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/) dataset and is capable of recognizing 20 different kinds of objects\. The model takes the video stream from your AWS DeepLens device as input and labels the objects that it identifies\. The project uses a pretrained optimized model that is ready to be deployed to your AWS DeepLens device\. After deploying it, you can watch your AWS DeepLens model recognize objects around you\.
 
 **Note**  
- When deploying an Amazon SageMaker\-trained SSD model, you must first run `deploy.py` \(available from [https://github\.com/apache/incubator\-mxnet/tree/master/example/ssd/](https://github.com/apache/incubator-mxnet/tree/master/example/ssd/)\) to convert the model artifact into a deployable mode\. After cloning or downloading [the MXNet repository](https://github.com/apache/incubator-mxnet), run the `git reset --hard 73d88974f8bca1e68441606fb0787a2cd17eb364` command before calling `deploy.py` to convert the model, if the latest version does not work\.
+ When deploying an SageMaker\-trained SSD model, you must first run `deploy.py` \(available from [https://github\.com/apache/incubator\-mxnet/tree/v1\.x/example/ssd/](https://github.com/apache/incubator-mxnet/tree/v1.x/example/ssd/)\) to convert the model artifact into a deployable model\. After cloning or downloading the MXNet repository, run the `git reset --hard 73d88974f8bca1e68441606fb0787a2cd17eb364` command before calling `deploy.py` to convert the model, if the latest version does not work\.
 
 The model is able to recognize the following objects: airplane, bicycle, bird, boat, bottle, bus, car, cat, chair, cow, dining table, dog, horse, motorbike, person, potted plant, sheep, sofa, train, and TV monitor\.
 + **Project model:** deeplens\-object\-detection
@@ -39,7 +39,7 @@ Inspired by a popular television show, this project classifies food as either a 
 
 It uses a model based on the [SqueezeNet deep neural network](http://gluon.mxnet.io/chapter08_computer-vision/fine-tuning.html)\. The model takes the video stream from your AWS DeepLens device as input, and labels images as a hot dog or not a hot dog\. The project uses a pretrained, optimized model that is ready to be deployed to your AWS DeepLens device\. After deploying the model, you can use the Live View feature to watch as the model recognizes hot dogs \.
 
-You can edit this model by creating Lambda functions that are triggered by the model's output\. For example, if the model detects a hot dog, a Lambda function could send you an SMS message\. To learn how to create this Lambda function, see [Use Amazon SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)
+You can edit this model by creating Lambda functions that are triggered by the model's output\. For example, if the model detects a hot dog, a Lambda function could send you an SMS message\. To learn how to create this Lambda function, see [Use SageMaker to Provision a Pre\-trained Model for a Sample Project](deeplens-train-model.md)
 
 ## Cat and Dog Recognition<a name="cat-or-dog"></a>
 
@@ -66,8 +66,8 @@ This sample project uses a deep learning model generated with the TensorFlow fra
  This project uses the [ResNet](https://arxiv.org/abs/1512.03385)\-50 network architecture to detect the orientation of the head\. The network has been trained on the [Prima HeadPose dataset](http://www-prima.inrialpes.fr/perso/Gourier/Faces/HPDatabase.html), which comprises 2,790 images of the faces of 15 people, with variations of pan and tilt angles from \-90 to \+90 degrees\. We categorized these head pose angles to 9 head pose classes: down right, right, up right, down, middle, up, down left, left, and up left\. 
 
 To help you get started, we have provided a pretrained, optimized model ready to deploy to your AWS DeepLens device \. After deploying the model, you can watch AWS DeepLens recognize various head poses\. 
-+ **Project model:** [deeplens\-head\-pose\-detection](https://s3.amazonaws.com/deeplens-managed-resources/models/Headpose/deeplens-headpose-detection.pb)
-+ **Project function:** [deeplens\-head\-pose\-detection](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/deeplens-head-pose-detection/versions/1?tab=graph)
++ **Project model:** [deeplens\-head\-pose\-detection](https://s3.amazonaws.com/deeplens-public/samples/headpose/deeplens-headpose-detection.pb)
++ **Project function:** [deeplens\-head\-pose\-detection](https://s3.amazonaws.com/deeplens-public/samples/headpose/deeplens-headpose-detection.pb)
 
 ## Bird Classification<a name="bird-classification"></a>
 
