@@ -9,7 +9,7 @@ In the following procedures, we walk you through securely connecting your AWS De
 **Note**  
 To use the AWS DeepLens console and other AWS services, you need an AWS account\. If you don't have an account, visit aws\.amazon\.com and choose **Create an AWS Account**\. For detailed instructions, see Create and Activate an AWS Account\.
 
-After you've created your AWS account, sign in to the AWS DeepLens console, with your AWS account or user credentials\. The topics in this section assume you've signed in to the AWS DeepComposer console\.
+After you've created your AWS account, sign in to the AWS DeepLens console, with your AWS account or user credentials\. The topics in this section assume you've signed in to the AWS DeepLens console\.
 
 **Topics**
 + [Register Your AWS DeepLens Device](deeplens-getting-started-register.md)
