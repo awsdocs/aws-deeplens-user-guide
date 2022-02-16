@@ -1,6 +1,6 @@
 # Create and Deploy a Sample Model \(\~ 10 mins\)<a name="deeplens-get-start-easy"></a>
 
-In this walkthrough, you'll use the AWS DeepLens console to create an AWS DeepLens project from the [Object Detection sample project template](deeplens-templated-projects-overview.md#object-recognition) to create an AWS DeepLens project\. The pre\-trained object detection model can analyze images from a video stream captured on your AWS DeepLens device and identify an objects as one of as many as 20 labeled image types\. The instructions presented here apply to creating and deploying other AWS DeepLens sample projects\. 
+In this walkthrough, you'll use the AWS DeepLens console to create an AWS DeepLens project from the [Object Detection sample project template](deeplens-templated-projects-overview.md#object-recognition) to create an AWS DeepLens project\. The pre\-trained object detection model can analyze images from a video stream captured on your AWS DeepLens device and identify an object as one of as many as 20 labeled image types\. The instructions presented here apply to creating and deploying other AWS DeepLens sample projects\. 
 
 The following diagram presents a high\-level overview of the processes to use the AWS DeepLens console to create and deploy a sample project\.
 
